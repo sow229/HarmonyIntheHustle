@@ -39,19 +39,19 @@ export default function DailyCheckIn({ onClose }: DailyCheckInProps) {
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-end">
       <div className="bg-[#0F0F14] w-full max-h-[85vh] rounded-t-3xl overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="p-6 border-b border-white/10 flex items-center justify-between">
-          <h3 className="font-bold text-lg">Daily Check-in</h3>
+        <div className="px-4 py-3 border-b border-white/10 flex items-center justify-between">
+          <h3 className="font-bold text-sm">Daily Check-in</h3>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+            className="p-1.5 hover:bg-white/5 rounded-lg transition-colors"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Progress Bar */}
-        <div className="px-6 pt-4">
-          <div className="flex gap-2 mb-4">
+        <div className="px-4 pt-2 pb-2">
+          <div className="flex gap-2">
             <div className={`flex-1 h-1 rounded-full transition-all ${
               step === "mood" || step === "energy" || step === "goals" || step === "complete"
                 ? "bg-[#3B82F6]"
@@ -71,30 +71,30 @@ export default function DailyCheckIn({ onClose }: DailyCheckInProps) {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto px-4 py-3">
           {/* Mood Step */}
           {step === "mood" && (
             <div className="animate-in fade-in duration-300">
-              <h4 className="text-xl font-bold mb-2">How are you feeling today?</h4>
-              <p className="text-sm text-white/50 mb-8">
+              <h4 className="font-bold mb-1 text-base">How are you feeling today?</h4>
+              <p className="text-xs text-white/50 mb-3">
                 Help us understand your current state
               </p>
 
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <button
                   onClick={() => handleMoodSelect("great")}
-                  className={`w-full p-5 rounded-2xl border-2 transition-all ${
+                  className={`w-full p-3 rounded-xl border-2 transition-all ${
                     mood === "great"
                       ? "bg-emerald-500/10 border-emerald-500/50"
                       : "bg-white/5 border-white/10 hover:border-emerald-500/30"
                   }`}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center">
-                      <Smile className="w-6 h-6 text-emerald-400" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                      <Smile className="w-4 h-4 text-emerald-400" />
                     </div>
                     <div className="text-left">
-                      <p className="font-semibold mb-1">Feeling Great</p>
+                      <p className="font-semibold text-sm">Feeling Great</p>
                       <p className="text-xs text-white/50">Energized and ready to build</p>
                     </div>
                   </div>
@@ -102,18 +102,18 @@ export default function DailyCheckIn({ onClose }: DailyCheckInProps) {
 
                 <button
                   onClick={() => handleMoodSelect("okay")}
-                  className={`w-full p-5 rounded-2xl border-2 transition-all ${
+                  className={`w-full p-3 rounded-xl border-2 transition-all ${
                     mood === "okay"
                       ? "bg-amber-500/10 border-amber-500/50"
                       : "bg-white/5 border-white/10 hover:border-amber-500/30"
                   }`}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center">
-                      <Meh className="w-6 h-6 text-amber-400" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-lg bg-amber-500/20 flex items-center justify-center">
+                      <Meh className="w-4 h-4 text-amber-400" />
                     </div>
                     <div className="text-left">
-                      <p className="font-semibold mb-1">Doing Okay</p>
+                      <p className="font-semibold text-sm">Doing Okay</p>
                       <p className="text-xs text-white/50">Getting through the day</p>
                     </div>
                   </div>
@@ -121,18 +121,18 @@ export default function DailyCheckIn({ onClose }: DailyCheckInProps) {
 
                 <button
                   onClick={() => handleMoodSelect("struggling")}
-                  className={`w-full p-5 rounded-2xl border-2 transition-all ${
+                  className={`w-full p-3 rounded-xl border-2 transition-all ${
                     mood === "struggling"
                       ? "bg-red-500/10 border-red-500/50"
                       : "bg-white/5 border-white/10 hover:border-red-500/30"
                   }`}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center">
-                      <Frown className="w-6 h-6 text-red-400" />
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-lg bg-red-500/20 flex items-center justify-center">
+                      <Frown className="w-4 h-4 text-red-400" />
                     </div>
                     <div className="text-left">
-                      <p className="font-semibold mb-1">Struggling</p>
+                      <p className="font-semibold text-sm">Struggling</p>
                       <p className="text-xs text-white/50">Need some support today</p>
                     </div>
                   </div>
@@ -144,17 +144,17 @@ export default function DailyCheckIn({ onClose }: DailyCheckInProps) {
           {/* Energy Step */}
           {step === "energy" && (
             <div className="animate-in fade-in duration-300">
-              <h4 className="text-xl font-bold mb-2">What's your energy level?</h4>
-              <p className="text-sm text-white/50 mb-8">
+              <h4 className="font-bold mb-1 text-base">What's your energy level?</h4>
+              <p className="text-xs text-white/50 mb-4">
                 Track your daily energy patterns
               </p>
 
-              <div className="mb-8">
-                <div className="text-center mb-6">
-                  <p className="text-6xl font-bold bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] bg-clip-text text-transparent">
+              <div className="mb-4">
+                <div className="text-center mb-4">
+                  <p className="text-4xl font-bold bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] bg-clip-text text-transparent">
                     {energy[0]}%
                   </p>
-                  <p className="text-sm text-white/40 mt-2">
+                  <p className="text-xs text-white/40 mt-1">
                     {energy[0] >= 80 ? "High Energy" : energy[0] >= 50 ? "Moderate Energy" : "Low Energy"}
                   </p>
                 </div>
@@ -170,7 +170,7 @@ export default function DailyCheckIn({ onClose }: DailyCheckInProps) {
 
               <button
                 onClick={handleEnergyNext}
-                className="w-full py-4 bg-[#3B82F6] hover:bg-[#2563EB] rounded-xl font-semibold transition-colors"
+                className="w-full py-3 bg-[#3B82F6] hover:bg-[#2563EB] rounded-xl font-semibold transition-colors text-sm"
               >
                 Continue
               </button>
@@ -180,12 +180,12 @@ export default function DailyCheckIn({ onClose }: DailyCheckInProps) {
           {/* Goals Step */}
           {step === "goals" && (
             <div className="animate-in fade-in duration-300">
-              <h4 className="text-xl font-bold mb-2">Today's focus areas</h4>
-              <p className="text-sm text-white/50 mb-8">
+              <h4 className="font-bold mb-1 text-base">Today's focus areas</h4>
+              <p className="text-xs text-white/50 mb-3">
                 What are you working on today?
               </p>
 
-              <div className="space-y-3 mb-8">
+              <div className="space-y-2 mb-4">
                 {Object.entries({
                   product: "Product Development",
                   fundraising: "Fundraising",
@@ -197,16 +197,16 @@ export default function DailyCheckIn({ onClose }: DailyCheckInProps) {
                     onClick={() =>
                       setGoals({ ...goals, [key]: !goals[key as keyof typeof goals] })
                     }
-                    className={`w-full p-4 rounded-xl border-2 transition-all flex items-center justify-between ${
+                    className={`w-full p-3 rounded-xl border-2 transition-all flex items-center justify-between ${
                       goals[key as keyof typeof goals]
                         ? "bg-[#3B82F6]/10 border-[#3B82F6]/50"
                         : "bg-white/5 border-white/10 hover:border-white/20"
                     }`}
                   >
-                    <span className="font-medium">{label}</span>
+                    <span className="font-medium text-sm">{label}</span>
                     {goals[key as keyof typeof goals] && (
-                      <div className="w-6 h-6 rounded-full bg-[#3B82F6] flex items-center justify-center">
-                        <Check className="w-4 h-4" />
+                      <div className="w-5 h-5 rounded-full bg-[#3B82F6] flex items-center justify-center">
+                        <Check className="w-3 h-3" />
                       </div>
                     )}
                   </button>
@@ -216,7 +216,7 @@ export default function DailyCheckIn({ onClose }: DailyCheckInProps) {
               <button
                 onClick={handleComplete}
                 disabled={!Object.values(goals).some((v) => v)}
-                className="w-full py-4 bg-[#3B82F6] hover:bg-[#2563EB] disabled:bg-white/5 disabled:text-white/30 rounded-xl font-semibold transition-colors"
+                className="w-full py-3 bg-[#3B82F6] hover:bg-[#2563EB] disabled:bg-white/5 disabled:text-white/30 rounded-xl font-semibold transition-colors text-sm"
               >
                 Complete Check-in
               </button>
@@ -225,25 +225,25 @@ export default function DailyCheckIn({ onClose }: DailyCheckInProps) {
 
           {/* Complete Step */}
           {step === "complete" && (
-            <div className="animate-in fade-in duration-300 text-center py-8">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] flex items-center justify-center mx-auto mb-6">
-                <Zap className="w-10 h-10 fill-white" />
+            <div className="animate-in fade-in duration-300 text-center py-4">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] flex items-center justify-center mx-auto mb-3">
+                <Zap className="w-7 h-7 fill-white" />
               </div>
-              
-              <h4 className="text-2xl font-bold mb-2">Check-in Complete!</h4>
-              <p className="text-white/50 mb-6">
+
+              <h4 className="text-lg font-bold mb-1">Check-in Complete!</h4>
+              <p className="text-white/50 mb-4 text-xs">
                 Great job staying consistent
               </p>
 
-              <div className="bg-gradient-to-br from-[#1A1A25] to-[#151520] border border-[#3B82F6]/20 rounded-2xl p-6">
-                <p className="text-sm text-white/50 mb-2">FounderBucks Earned</p>
-                <p className="text-4xl font-bold bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] bg-clip-text text-transparent">
+              <div className="bg-gradient-to-br from-[#1A1A25] to-[#151520] border border-[#3B82F6]/20 rounded-xl p-4">
+                <p className="text-xs text-white/50 mb-1">FounderBucks Earned</p>
+                <p className="text-2xl font-bold bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] bg-clip-text text-transparent">
                   +{xpReward}
                 </p>
               </div>
 
-              <div className="mt-6 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
-                <p className="text-sm text-emerald-400">
+              <div className="mt-3 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                <p className="text-xs text-emerald-400">
                   🔥 14-day streak maintained!
                 </p>
               </div>
