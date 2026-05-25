@@ -57,22 +57,22 @@ export default function FounderMatch() {
   ];
 
   return (
-    <div className="min-h-full bg-[#0F0F14] text-white px-6 pt-14 pb-6">
+    <div className="min-h-full bg-[#0F1117] text-[#EDE8DF] px-6 pt-14 pb-6">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight mb-2">Founder Match</h1>
-        <p className="text-sm text-white/50">Founders aligned with your stage and goals</p>
+        <p className="text-sm text-[#9a948a]">Founders aligned with your stage and goals</p>
       </div>
 
       {/* Match Quality Banner */}
-      <div className="bg-gradient-to-br from-[#1A1A25] to-[#151520] border border-[#8B5CF6]/20 rounded-2xl p-5 mb-8">
+      <div className="bg-gradient-to-br from-[#161922] to-[#12151D] border border-[#5C7568]/20 rounded-lg p-5 mb-8">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#8B5CF6]/20 flex items-center justify-center">
-            <Sparkles className="w-5 h-5 text-[#8B5CF6]" />
+          <div className="w-10 h-10 rounded-xl bg-[#5C7568]/20 flex items-center justify-center">
+            <Sparkles className="w-5 h-5 text-[#5C7568]" />
           </div>
           <div>
             <h3 className="font-semibold mb-0.5">High-Quality Matches</h3>
-            <p className="text-xs text-white/50">Based on stage, industry, and goals</p>
+            <p className="text-xs text-[#9a948a]">Based on stage, industry, and goals</p>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default function FounderMatch() {
         {matches.map((founder) => (
           <div
             key={founder.id}
-            className="bg-[#1A1A25] border border-white/10 rounded-2xl p-6 hover:border-white/20 transition-all"
+            className="bg-[#161922] border border-white/10 rounded-lg p-6 hover:border-white/20 transition-all"
           >
             {/* Founder Header */}
             <div className="flex items-start gap-4 mb-4">
@@ -95,8 +95,8 @@ export default function FounderMatch() {
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-bold text-lg">{founder.name}</h3>
-                  <div className="px-2.5 py-1 bg-gradient-to-r from-[#3B82F6]/20 to-[#8B5CF6]/20 border border-[#3B82F6]/30 rounded-lg">
-                    <span className="text-xs font-bold bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] bg-clip-text text-transparent">
+                  <div className="px-2.5 py-1 bg-gradient-to-r from-[#6B9080]/20 to-[#5C7568]/20 border border-[#6B9080]/30 rounded-lg">
+                    <span className="text-xs font-bold bg-gradient-to-r from-[#6B9080] to-[#5C7568] bg-clip-text text-transparent">
                       {founder.matchScore}% match
                     </span>
                   </div>
@@ -111,7 +111,7 @@ export default function FounderMatch() {
                   </span>
                 </div>
                 
-                <div className="flex items-center gap-1 text-xs text-white/50">
+                <div className="flex items-center gap-1 text-xs text-[#9a948a]">
                   <MapPin className="w-3 h-3" />
                   {founder.location}
                 </div>
@@ -119,12 +119,12 @@ export default function FounderMatch() {
             </div>
 
             {/* Bio */}
-            <p className="text-sm text-white/70 mb-4 leading-relaxed">
+            <p className="text-sm text-[#c9c2b8] mb-4 leading-relaxed">
               {founder.bio}
             </p>
 
             {/* Connect Button */}
-            <button className="w-full py-3 bg-gradient-to-r from-[#3B82F6] to-[#2563EB] hover:from-[#2563EB] hover:to-[#1D4ED8] rounded-xl font-semibold transition-all">
+            <button className="w-full py-3 bg-gradient-to-r from-[#6B9080] to-[#4F6D5F] hover:from-[#4F6D5F] hover:to-[#405A4F] rounded-xl font-semibold transition-all">
               Connect
             </button>
           </div>
@@ -133,7 +133,7 @@ export default function FounderMatch() {
 
       {/* Bottom Info */}
       <div className="mt-8 text-center">
-        <p className="text-xs text-white/40">
+        <p className="text-xs text-[#EDE8DF]/40">
           Matches refresh daily based on your activity and profile
         </p>
       </div>

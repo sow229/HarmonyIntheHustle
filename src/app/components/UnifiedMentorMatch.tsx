@@ -175,11 +175,11 @@ export default function UnifiedMentorMatch() {
   };
 
   return (
-    <div className="min-h-full bg-gradient-to-b from-[#0F0F14] via-[#0F0F14] to-[#1A0F1E] dark:bg-gradient-to-b dark:from-[#0F0F14] dark:via-[#0F0F14] dark:to-[#1A0F1E] bg-white dark:text-white text-gray-900 px-6 pt-14 pb-6">
+    <div className="min-h-full bg-gradient-to-b from-[#0F1117] via-[#0F1117] to-[#12151D] text-[#EDE8DF] px-6 pt-14 pb-6 app-texture">
       {/* Header */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-2">
-          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-[#3B82F6] via-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-[#6B9080] via-[#5C7568] to-[#8A9B8F] bg-clip-text text-transparent">
             Mentor Match
           </h1>
           <button className="p-2 hover:bg-white/5 dark:hover:bg-white/5 hover:bg-gray-100 rounded-lg transition-colors">
@@ -195,7 +195,7 @@ export default function UnifiedMentorMatch() {
           onClick={() => setActiveTab("mentors")}
           className={`flex-1 py-3 px-4 rounded-lg font-semibold text-sm transition-all ${
             activeTab === "mentors"
-              ? "bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white shadow-lg shadow-[#3B82F6]/20"
+              ? "bg-gradient-to-r from-[#6B9080] to-[#5C7568] text-white shadow-lg shadow-[#6B9080]/20"
               : "text-white/60 dark:text-white/60 text-gray-600 hover:text-white dark:hover:text-white hover:text-gray-900"
           }`}
         >
@@ -208,7 +208,7 @@ export default function UnifiedMentorMatch() {
           onClick={() => setActiveTab("founders")}
           className={`flex-1 py-3 px-4 rounded-lg font-semibold text-sm transition-all ${
             activeTab === "founders"
-              ? "bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white shadow-lg shadow-[#3B82F6]/20"
+              ? "bg-gradient-to-r from-[#6B9080] to-[#5C7568] text-white shadow-lg shadow-[#6B9080]/20"
               : "text-white/60 dark:text-white/60 text-gray-600 hover:text-white dark:hover:text-white hover:text-gray-900"
           }`}
         >
@@ -234,7 +234,7 @@ export default function UnifiedMentorMatch() {
                 onClick={() => setFilter("all")}
                 className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
                   filter === "all"
-                    ? "bg-[#3B82F6] text-white shadow-lg shadow-[#3B82F6]/30"
+                    ? "bg-[#6B9080] text-white shadow-lg shadow-[#6B9080]/30"
                     : "bg-white/5 dark:bg-white/5 bg-gray-100 text-white/60 dark:text-white/60 text-gray-600 hover:bg-white/10 dark:hover:bg-white/10 hover:bg-gray-200"
                 }`}
               >
@@ -244,7 +244,7 @@ export default function UnifiedMentorMatch() {
                 onClick={() => setFilter("available")}
                 className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
                   filter === "available"
-                    ? "bg-[#3B82F6] text-white shadow-lg shadow-[#3B82F6]/30"
+                    ? "bg-[#6B9080] text-white shadow-lg shadow-[#6B9080]/30"
                     : "bg-white/5 dark:bg-white/5 bg-gray-100 text-white/60 dark:text-white/60 text-gray-600 hover:bg-white/10 dark:hover:bg-white/10 hover:bg-gray-200"
                 }`}
               >
@@ -254,7 +254,7 @@ export default function UnifiedMentorMatch() {
                 onClick={() => setFilter("top")}
                 className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
                   filter === "top"
-                    ? "bg-[#3B82F6] text-white shadow-lg shadow-[#3B82F6]/30"
+                    ? "bg-[#6B9080] text-white shadow-lg shadow-[#6B9080]/30"
                     : "bg-white/5 dark:bg-white/5 bg-gray-100 text-white/60 dark:text-white/60 text-gray-600 hover:bg-white/10 dark:hover:bg-white/10 hover:bg-gray-200"
                 }`}
               >
@@ -276,7 +276,7 @@ export default function UnifiedMentorMatch() {
                   : { scale: 1, opacity: 1, x: 0, rotate: 0 }
               }
               transition={{ duration: 0.3 }}
-              className="bg-gradient-to-br from-[#1A1A25] to-[#151520] dark:from-[#1A1A25] dark:to-[#151520] from-gray-50 to-gray-100 border border-white/10 dark:border-white/10 border-gray-200 rounded-3xl overflow-hidden mb-6 shadow-2xl shadow-[#3B82F6]/10 relative"
+              className="bg-gradient-to-br from-[#161922] to-[#12151D] border border-[rgba(237,232,223,0.1)] rounded-xl overflow-hidden mb-6 shadow-2xl shadow-black/20 relative"
             >
               {/* Happy Animation Overlay */}
               <AnimatePresence>
@@ -305,14 +305,14 @@ export default function UnifiedMentorMatch() {
                   alt={currentMentor.name}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#151520] dark:from-[#151520] from-gray-100 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#12151D] via-transparent to-transparent" />
 
                 {/* Match Score Badge */}
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.2, type: "spring" }}
-                  className="absolute top-4 right-4 px-4 py-2 bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] rounded-full flex items-center gap-2 shadow-lg shadow-[#3B82F6]/50"
+                  className="absolute top-4 right-4 px-4 py-2 bg-gradient-to-r from-[#6B9080] to-[#5C7568] rounded-full flex items-center gap-2 shadow-lg shadow-[#6B9080]/50"
                 >
                   <Zap className="w-4 h-4 fill-white" />
                   <span className="text-sm font-bold">{currentMentor.matchScore}% Match</span>
@@ -324,7 +324,7 @@ export default function UnifiedMentorMatch() {
                     currentMentor.availability === "High"
                       ? "bg-white/20 border border-white/30 text-white"
                       : currentMentor.availability === "Medium"
-                      ? "bg-amber-500/20 border border-amber-500/30 text-amber-400"
+                      ? "bg-[#6B9080]/20 border border-[#6B9080]/30 text-[#A8C4B8]"
                       : "bg-red-500/20 border border-red-500/30 text-red-400"
                   }`}>
                     {currentMentor.availability} Availability
@@ -348,7 +348,7 @@ export default function UnifiedMentorMatch() {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.1 * idx }}
-                      className="px-3 py-1.5 bg-gradient-to-r from-[#3B82F6]/10 to-[#8B5CF6]/10 border border-[#3B82F6]/20 rounded-lg text-xs font-medium text-[#3B82F6]"
+                      className="px-3 py-1.5 bg-gradient-to-r from-[#6B9080]/10 to-[#5C7568]/10 border border-[#6B9080]/20 rounded-lg text-xs font-medium text-[#6B9080]"
                     >
                       {skill}
                     </motion.span>
@@ -398,7 +398,7 @@ export default function UnifiedMentorMatch() {
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={handlePass}
-                className="flex-1 py-4 bg-white/5 dark:bg-white/5 bg-gray-100 hover:bg-white/10 dark:hover:bg-white/10 hover:bg-gray-200 border border-white/10 dark:border-white/10 border-gray-200 hover:border-red-500/30 rounded-2xl transition-all flex items-center justify-center gap-3 group"
+                className="flex-1 py-4 bg-white/5 dark:bg-white/5 bg-gray-100 hover:bg-white/10 dark:hover:bg-white/10 hover:bg-gray-200 border border-white/10 dark:border-white/10 border-gray-200 hover:border-red-500/30 rounded-lg transition-all flex items-center justify-center gap-3 group"
               >
                 <X className="w-6 h-6 text-white/40 dark:text-white/40 text-gray-500 group-hover:text-red-400 transition-colors" />
                 <span className="font-semibold text-white/60 dark:text-white/60 text-gray-700 group-hover:text-white dark:group-hover:text-white group-hover:text-gray-900 transition-colors">Pass</span>
@@ -406,7 +406,7 @@ export default function UnifiedMentorMatch() {
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={handleConnect}
-                className="flex-1 py-4 bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] hover:from-[#2563EB] hover:to-[#7C3AED] rounded-2xl transition-all flex items-center justify-center gap-3 group shadow-lg shadow-[#3B82F6]/30"
+                className="flex-1 py-4 bg-gradient-to-r from-[#6B9080] to-[#5C7568] hover:from-[#4F6D5F] hover:to-[#4A5E52] rounded-lg transition-all flex items-center justify-center gap-3 group shadow-lg shadow-[#6B9080]/30"
               >
                 <Check className="w-6 h-6" />
                 <span className="font-semibold">Connect</span>
@@ -424,7 +424,7 @@ export default function UnifiedMentorMatch() {
                     key={idx}
                     className={`h-1 rounded-full transition-all ${
                       idx === currentIndex
-                        ? "w-8 bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6]"
+                        ? "w-8 bg-gradient-to-r from-[#6B9080] to-[#5C7568]"
                         : idx < currentIndex
                         ? "w-4 bg-emerald-500/50"
                         : "w-4 bg-white/10 dark:bg-white/10 bg-gray-300"
@@ -440,7 +440,7 @@ export default function UnifiedMentorMatch() {
                 <h3 className="text-xs font-semibold text-white/50 dark:text-white/50 text-gray-600 uppercase tracking-wide">
                   My Mentor Connections
                 </h3>
-                <button className="text-xs font-semibold text-[#3B82F6] hover:text-[#2563EB] flex items-center gap-1">
+                <button className="text-xs font-semibold text-[#6B9080] hover:text-[#4F6D5F] flex items-center gap-1">
                   View All
                   <ChevronRight className="w-3 h-3" />
                 </button>
@@ -450,7 +450,7 @@ export default function UnifiedMentorMatch() {
                 {mentors.slice(0, 2).map((mentor) => (
                   <div
                     key={mentor.id}
-                    className="bg-[#1A1A25] dark:bg-[#1A1A25] bg-gray-100 border border-white/10 dark:border-white/10 border-gray-200 rounded-xl p-4 hover:border-[#3B82F6]/50 transition-all cursor-pointer"
+                    className="bg-[#161922] dark:bg-[#161922] bg-gray-100 border border-white/10 dark:border-white/10 border-gray-200 rounded-xl p-4 hover:border-[#6B9080]/50 transition-all cursor-pointer"
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-full bg-gradient-to-br from-white/10 to-white/5 overflow-hidden flex-shrink-0">
@@ -464,8 +464,8 @@ export default function UnifiedMentorMatch() {
                         <p className="font-semibold text-sm truncate">{mentor.name}</p>
                         <p className="text-xs text-white/50 dark:text-white/50 text-gray-600 truncate">{mentor.title}</p>
                       </div>
-                      <button className="p-2 bg-[#3B82F6]/10 hover:bg-[#3B82F6]/20 rounded-lg transition-colors flex-shrink-0">
-                        <MessageCircle className="w-4 h-4 text-[#3B82F6]" />
+                      <button className="p-2 bg-[#6B9080]/10 hover:bg-[#6B9080]/20 rounded-lg transition-colors flex-shrink-0">
+                        <MessageCircle className="w-4 h-4 text-[#6B9080]" />
                       </button>
                     </div>
                   </div>
@@ -482,10 +482,10 @@ export default function UnifiedMentorMatch() {
             transition={{ duration: 0.2 }}
           >
             {/* Match Quality Banner */}
-            <div className="bg-gradient-to-br from-[#1A1A25] to-[#151520] dark:from-[#1A1A25] dark:to-[#151520] from-gray-50 to-gray-100 border border-[#8B5CF6]/20 rounded-2xl p-5 mb-8 shadow-lg shadow-[#8B5CF6]/10">
+            <div className="bg-gradient-to-br from-[#161922] to-[#12151D] border border-[#6B9080]/20 rounded-lg p-5 mb-8 shadow-lg shadow-black/15">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#8B5CF6]/20 to-[#EC4899]/20 flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-[#8B5CF6]" />
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#5C7568]/20 to-[#8A9B8F]/20 flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-[#5C7568]" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-0.5">High-Quality Matches</h3>
@@ -502,7 +502,7 @@ export default function UnifiedMentorMatch() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.1 }}
-                  className="bg-[#1A1A25] dark:bg-[#1A1A25] bg-gray-50 border border-white/10 dark:border-white/10 border-gray-200 rounded-2xl p-6 hover:border-[#8B5CF6]/50 hover:shadow-lg hover:shadow-[#8B5CF6]/10 transition-all"
+                  className="bg-[#161922] dark:bg-[#161922] bg-gray-50 border border-white/10 dark:border-white/10 border-gray-200 rounded-lg p-6 hover:border-[#5C7568]/50 hover:shadow-lg hover:shadow-[#5C7568]/10 transition-all"
                 >
                   {/* Founder Header */}
                   <div className="flex items-start gap-4 mb-4">
@@ -515,8 +515,8 @@ export default function UnifiedMentorMatch() {
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
                         <h3 className="font-bold text-lg">{founder.name}</h3>
-                        <div className="px-2.5 py-1 bg-gradient-to-r from-[#3B82F6]/20 to-[#8B5CF6]/20 border border-[#3B82F6]/30 rounded-lg">
-                          <span className="text-xs font-bold bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] bg-clip-text text-transparent">
+                        <div className="px-2.5 py-1 bg-gradient-to-r from-[#6B9080]/20 to-[#5C7568]/20 border border-[#6B9080]/30 rounded-lg">
+                          <span className="text-xs font-bold bg-gradient-to-r from-[#6B9080] to-[#5C7568] bg-clip-text text-transparent">
                             {founder.matchScore}% match
                           </span>
                         </div>
@@ -546,7 +546,7 @@ export default function UnifiedMentorMatch() {
                   {/* Connect Button */}
                   <motion.button
                     whileTap={{ scale: 0.98 }}
-                    className="w-full py-3 bg-gradient-to-r from-[#3B82F6] to-[#2563EB] hover:from-[#2563EB] hover:to-[#1D4ED8] rounded-xl font-semibold transition-all shadow-lg shadow-[#3B82F6]/30"
+                    className="w-full py-3 bg-gradient-to-r from-[#6B9080] to-[#4F6D5F] hover:from-[#4F6D5F] hover:to-[#405A4F] rounded-xl font-semibold transition-all shadow-lg shadow-[#6B9080]/30"
                   >
                     Connect
                   </motion.button>

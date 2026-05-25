@@ -59,25 +59,25 @@ export default function FounderSignal() {
   ];
 
   return (
-    <div className="min-h-full bg-[#0F0F14] text-white px-6 pt-14 pb-6">
+    <div className="min-h-full bg-[#0F1117] text-[#EDE8DF] px-6 pt-14 pb-6">
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-3xl font-bold tracking-tight mb-2">Founder Signal</h1>
-        <p className="text-sm text-white/50">Share anonymously, connect authentically</p>
+        <p className="text-sm text-[#9a948a]">Share anonymously, connect authentically</p>
       </div>
 
       {/* Post Input */}
-      <div className="bg-[#1A1A25] border border-white/10 rounded-2xl p-4 mb-6">
+      <div className="bg-[#161922] border border-white/10 rounded-lg p-4 mb-6">
         <textarea
           value={newPost}
           onChange={(e) => setNewPost(e.target.value)}
           placeholder="Share something anonymously..."
-          className="w-full bg-transparent text-white placeholder:text-white/30 resize-none outline-none mb-3 min-h-[80px]"
+          className="w-full bg-transparent text-[#EDE8DF] placeholder:text-[#EDE8DF]/30 resize-none outline-none mb-3 min-h-[80px]"
         />
         <div className="flex items-center justify-between">
-          <span className="text-xs text-white/40">Posted as: Founder, SaaS, Pre-seed</span>
+          <span className="text-xs text-[#EDE8DF]/40">Posted as: Founder, SaaS, Pre-seed</span>
           <button 
-            className="px-4 py-2 bg-[#3B82F6] hover:bg-[#2563EB] rounded-lg text-sm font-semibold transition-colors flex items-center gap-2"
+            className="px-4 py-2 bg-[#6B9080] hover:bg-[#4F6D5F] rounded-lg text-sm font-semibold transition-colors flex items-center gap-2"
             disabled={!newPost.trim()}
           >
             <Send className="w-4 h-4" />
@@ -91,7 +91,7 @@ export default function FounderSignal() {
         {posts.map((post) => (
           <div
             key={post.id}
-            className="bg-[#1A1A25] border border-white/10 rounded-2xl p-5"
+            className="bg-[#161922] border border-white/10 rounded-lg p-5"
           >
             {/* Post Header */}
             <div className="flex items-center justify-between mb-3">
@@ -101,36 +101,36 @@ export default function FounderSignal() {
                 </div>
                 <div>
                   <p className="text-sm font-medium">{post.founderType}</p>
-                  <p className="text-xs text-white/40">{post.stage}</p>
+                  <p className="text-xs text-[#EDE8DF]/40">{post.stage}</p>
                 </div>
               </div>
-              <span className="text-xs text-white/40">{post.timestamp}</span>
+              <span className="text-xs text-[#EDE8DF]/40">{post.timestamp}</span>
             </div>
 
             {/* Post Content */}
-            <p className="text-sm text-white/80 leading-relaxed mb-4">
+            <p className="text-sm text-[#EDE8DF]/80 leading-relaxed mb-4">
               {post.content}
             </p>
 
             {/* Interaction Buttons */}
             <div className="flex items-center gap-2">
-              <button className="flex-1 px-3 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#3B82F6]/30 rounded-lg transition-all flex items-center justify-center gap-2 group">
-                <Heart className="w-4 h-4 text-white/40 group-hover:text-[#3B82F6] transition-colors" />
-                <span className="text-xs font-medium text-white/60 group-hover:text-white transition-colors">
+              <button className="flex-1 px-3 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#6B9080]/30 rounded-lg transition-all flex items-center justify-center gap-2 group">
+                <Heart className="w-4 h-4 text-[#EDE8DF]/40 group-hover:text-[#6B9080] transition-colors" />
+                <span className="text-xs font-medium text-[#9a948a] group-hover:text-[#EDE8DF] transition-colors">
                   {post.resonates}
                 </span>
               </button>
 
               <button className="flex-1 px-3 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/30 rounded-lg transition-all flex items-center justify-center gap-2 group">
-                <MessageCircle className="w-4 h-4 text-white/40 group-hover:text-emerald-500 transition-colors" />
-                <span className="text-xs font-medium text-white/60 group-hover:text-white transition-colors">
+                <MessageCircle className="w-4 h-4 text-[#EDE8DF]/40 group-hover:text-emerald-500 transition-colors" />
+                <span className="text-xs font-medium text-[#9a948a] group-hover:text-[#EDE8DF] transition-colors">
                   {post.supports}
                 </span>
               </button>
 
-              <button className="flex-1 px-3 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#8B5CF6]/30 rounded-lg transition-all flex items-center justify-center gap-2 group">
-                <Lightbulb className="w-4 h-4 text-white/40 group-hover:text-[#8B5CF6] transition-colors" />
-                <span className="text-xs font-medium text-white/60 group-hover:text-white transition-colors">
+              <button className="flex-1 px-3 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#5C7568]/30 rounded-lg transition-all flex items-center justify-center gap-2 group">
+                <Lightbulb className="w-4 h-4 text-[#EDE8DF]/40 group-hover:text-[#5C7568] transition-colors" />
+                <span className="text-xs font-medium text-[#9a948a] group-hover:text-[#EDE8DF] transition-colors">
                   {post.insights}
                 </span>
               </button>

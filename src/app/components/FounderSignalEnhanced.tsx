@@ -181,10 +181,10 @@ export default function FounderSignalEnhanced() {
   const selectedPostData = posts.find(p => p.id === selectedPost);
 
   return (
-    <div className="min-h-full bg-gradient-to-b from-[#0F0F14] via-[#0F0F14] to-[#0F141A] dark:bg-gradient-to-b dark:from-[#0F0F14] dark:via-[#0F0F14] dark:to-[#0F141A] bg-white text-gray-900 dark:text-white px-6 pt-14 pb-6">
+    <div className="min-h-full bg-gradient-to-b from-[#0F1117] via-[#0F1117] to-[#12151D] text-[#EDE8DF] px-6 pt-14 pb-6 app-texture">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-3xl font-bold tracking-tight mb-2 bg-gradient-to-r from-[#3B82F6] via-[#06B6D4] to-[#3B82F6] bg-clip-text text-transparent">
+        <h1 className="text-3xl font-bold tracking-tight mb-2 bg-gradient-to-r from-[#6B9080] via-[#6B9080] to-[#6B9080] bg-clip-text text-transparent">
           Founder Signal
         </h1>
         <div className="flex items-center gap-2">
@@ -194,12 +194,12 @@ export default function FounderSignalEnhanced() {
       </div>
 
       {/* Sort Tabs */}
-      <div className="flex gap-2 mb-6 bg-[#1A1A25] dark:bg-[#1A1A25] bg-gray-100 border border-white/10 dark:border-white/10 border-gray-200 rounded-xl p-1">
+      <div className="flex gap-2 mb-6 bg-[#161922] dark:bg-[#161922] bg-gray-100 border border-white/10 dark:border-white/10 border-gray-200 rounded-xl p-1">
         <button
           onClick={() => setSortBy("hot")}
           className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 ${
             sortBy === "hot"
-              ? "bg-[#3B82F6] text-white"
+              ? "bg-[#6B9080] text-white"
               : "text-white/60 dark:text-white/60 text-gray-600 hover:text-white dark:hover:text-white hover:text-gray-900"
           }`}
         >
@@ -210,7 +210,7 @@ export default function FounderSignalEnhanced() {
           onClick={() => setSortBy("new")}
           className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 ${
             sortBy === "new"
-              ? "bg-[#3B82F6] text-white"
+              ? "bg-[#6B9080] text-white"
               : "text-white/60 dark:text-white/60 text-gray-600 hover:text-white dark:hover:text-white hover:text-gray-900"
           }`}
         >
@@ -221,7 +221,7 @@ export default function FounderSignalEnhanced() {
           onClick={() => setSortBy("top")}
           className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 ${
             sortBy === "top"
-              ? "bg-[#3B82F6] text-white"
+              ? "bg-[#6B9080] text-white"
               : "text-white/60 dark:text-white/60 text-gray-600 hover:text-white dark:hover:text-white hover:text-gray-900"
           }`}
         >
@@ -231,7 +231,7 @@ export default function FounderSignalEnhanced() {
       </div>
 
       {/* Post Input */}
-      <div className="bg-[#1A1A25] dark:bg-[#1A1A25] bg-gray-50 border border-white/10 dark:border-white/10 border-gray-200 rounded-2xl p-4 mb-6">
+      <div className="bg-[#161922] dark:bg-[#161922] bg-gray-50 border border-white/10 dark:border-white/10 border-gray-200 rounded-lg p-4 mb-6">
         <textarea
           value={newPost}
           onChange={(e) => setNewPost(e.target.value)}
@@ -244,7 +244,7 @@ export default function FounderSignalEnhanced() {
             <span className="text-xs text-white/60 dark:text-white/60 text-gray-700 font-medium">Founder, SaaS, Pre-seed</span>
           </div>
           <button
-            className="px-4 py-2 bg-[#3B82F6] hover:bg-[#2563EB] disabled:bg-white/5 disabled:text-white/30 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2"
+            className="px-4 py-2 bg-[#6B9080] hover:bg-[#4F6D5F] disabled:bg-white/5 disabled:text-white/30 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2"
             disabled={!newPost.trim()}
           >
             <Send className="w-4 h-4" />
@@ -258,7 +258,7 @@ export default function FounderSignalEnhanced() {
         {sortedPosts.map((post) => (
           <div
             key={post.id}
-            className="bg-[#1A1A25] dark:bg-[#1A1A25] bg-gray-50 border border-white/10 dark:border-white/10 border-gray-200 rounded-2xl overflow-hidden transition-all"
+            className="bg-[#161922] dark:bg-[#161922] bg-gray-50 border border-white/10 dark:border-white/10 border-gray-200 rounded-lg overflow-hidden transition-all"
           >
             <div className="p-5">
               {/* Post Header */}
@@ -300,15 +300,15 @@ export default function FounderSignalEnhanced() {
                     onClick={() => handleVote(post.id, "up")}
                     className={`p-1.5 rounded transition-all ${
                       post.userVote === "up"
-                        ? "bg-[#3B82F6] text-white"
-                        : "hover:bg-white/10 dark:hover:bg-white/10 hover:bg-gray-200 text-white/40 dark:text-white/40 text-gray-500 hover:text-[#3B82F6]"
+                        ? "bg-[#6B9080] text-white"
+                        : "hover:bg-white/10 dark:hover:bg-white/10 hover:bg-gray-200 text-white/40 dark:text-white/40 text-gray-500 hover:text-[#6B9080]"
                     }`}
                   >
                     <ArrowUp className="w-4 h-4" />
                   </button>
                   <span className={`text-sm font-semibold min-w-[32px] text-center ${
                     (post.upvotes - post.downvotes) > 0
-                      ? "text-[#3B82F6]"
+                      ? "text-[#6B9080]"
                       : (post.upvotes - post.downvotes) < 0
                       ? "text-red-400"
                       : "text-white/60 dark:text-white/60 text-gray-600"
@@ -351,7 +351,7 @@ export default function FounderSignalEnhanced() {
       {/* Comments Modal */}
       {selectedPost && selectedPostData && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-end">
-          <div className="bg-[#0F0F14] w-full max-h-[85vh] rounded-t-3xl overflow-hidden flex flex-col">
+          <div className="bg-[#0F1117] w-full max-h-[85vh] rounded-t-3xl overflow-hidden flex flex-col">
             {/* Modal Header */}
             <div className="p-6 border-b border-white/10 flex items-center justify-between">
               <h3 className="font-bold text-lg">Comments ({selectedPostData.commentCount})</h3>
@@ -367,7 +367,7 @@ export default function FounderSignalEnhanced() {
             <div className="flex-1 overflow-y-auto p-6 space-y-4">
               {selectedPostData.comments && selectedPostData.comments.length > 0 ? (
                 selectedPostData.comments.map((comment) => (
-                  <div key={comment.id} className="bg-[#1A1A25] border border-white/10 rounded-xl p-4">
+                  <div key={comment.id} className="bg-[#161922] border border-white/10 rounded-xl p-4">
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center">
@@ -395,18 +395,18 @@ export default function FounderSignalEnhanced() {
             </div>
 
             {/* Comment Input */}
-            <div className="p-6 border-t border-white/10 bg-[#1A1A25]">
+            <div className="p-6 border-t border-white/10 bg-[#161922]">
               <div className="flex gap-3">
                 <input
                   type="text"
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
                   placeholder="Add a comment..."
-                  className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-[#3B82F6]/50 transition-colors"
+                  className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-[#6B9080]/50 transition-colors"
                 />
                 <button
                   disabled={!newComment.trim()}
-                  className="px-5 py-3 bg-[#3B82F6] hover:bg-[#2563EB] disabled:bg-white/5 disabled:text-white/30 rounded-xl font-semibold transition-colors"
+                  className="px-5 py-3 bg-[#6B9080] hover:bg-[#4F6D5F] disabled:bg-white/5 disabled:text-white/30 rounded-xl font-semibold transition-colors"
                 >
                   <Send className="w-4 h-4" />
                 </button>

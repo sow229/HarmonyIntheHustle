@@ -31,9 +31,9 @@ export default function FounderInsights() {
       description: "Sleep recovery improved consistency by 21%",
       trend: "+21%",
       positive: true,
-      color: "from-[#3B82F6] to-[#2563EB]",
-      iconBg: "bg-[#3B82F6]/10",
-      iconColor: "text-[#3B82F6]"
+      color: "from-[#6B9080] to-[#4F6D5F]",
+      iconBg: "bg-[#6B9080]/10",
+      iconColor: "text-[#6B9080]"
     },
     {
       icon: Calendar,
@@ -58,23 +58,23 @@ export default function FounderInsights() {
   ];
 
   return (
-    <div className="min-h-full bg-[#0F0F14] text-white px-6 pt-14 pb-6">
+    <div className="min-h-full bg-[#0F1117] text-[#EDE8DF] px-6 pt-14 pb-6">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight mb-2">Founder Insights</h1>
-        <p className="text-sm text-white/50">Health & performance analytics</p>
+        <p className="text-sm text-[#9a948a]">Health & performance analytics</p>
       </div>
 
       {/* Sleep Trend Card */}
-      <div className="bg-[#1A1A25] border border-white/10 rounded-2xl p-5 mb-4">
+      <div className="bg-[#453D36] border border-white/10 rounded-lg p-5 mb-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#3B82F6]/10 flex items-center justify-center">
-              <Moon className="w-5 h-5 text-[#3B82F6]" />
+            <div className="w-10 h-10 rounded-xl bg-[#6B9080]/10 flex items-center justify-center">
+              <Moon className="w-5 h-5 text-[#6B9080]" />
             </div>
             <div>
               <h3 className="font-semibold">Sleep Duration</h3>
-              <p className="text-xs text-white/50">Last 7 days</p>
+              <p className="text-xs text-[#9a948a]">Last 7 days</p>
             </div>
           </div>
           <div className="text-right">
@@ -88,8 +88,8 @@ export default function FounderInsights() {
             <AreaChart data={sleepData}>
               <defs>
                 <linearGradient id="sleepGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#6B9080" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#6B9080" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <XAxis 
@@ -109,7 +109,7 @@ export default function FounderInsights() {
               <Area
                 type="monotone"
                 dataKey="hours"
-                stroke="#3B82F6"
+                stroke="#6B9080"
                 strokeWidth={2}
                 fill="url(#sleepGradient)"
               />
@@ -119,15 +119,15 @@ export default function FounderInsights() {
       </div>
 
       {/* Meeting Load Card */}
-      <div className="bg-[#1A1A25] border border-white/10 rounded-2xl p-5 mb-4">
+      <div className="bg-[#453D36] border border-white/10 rounded-lg p-5 mb-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#8B5CF6]/10 flex items-center justify-center">
-              <Calendar className="w-5 h-5 text-[#8B5CF6]" />
+            <div className="w-10 h-10 rounded-xl bg-[#5C7568]/10 flex items-center justify-center">
+              <Calendar className="w-5 h-5 text-[#5C7568]" />
             </div>
             <div>
               <h3 className="font-semibold">Meeting Load</h3>
-              <p className="text-xs text-white/50">This week</p>
+              <p className="text-xs text-[#9a948a]">This week</p>
             </div>
           </div>
           <div className="text-right">
@@ -138,22 +138,22 @@ export default function FounderInsights() {
 
         <div className="space-y-2">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-white/60">1-on-1s</span>
+            <span className="text-[#9a948a]">1-on-1s</span>
             <span className="font-semibold">8h</span>
           </div>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-white/60">Team meetings</span>
+            <span className="text-[#9a948a]">Team meetings</span>
             <span className="font-semibold">6h</span>
           </div>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-white/60">External calls</span>
+            <span className="text-[#9a948a]">External calls</span>
             <span className="font-semibold">4h</span>
           </div>
         </div>
       </div>
 
       {/* Stress & Recovery Card */}
-      <div className="bg-[#1A1A25] border border-white/10 rounded-2xl p-5 mb-4">
+      <div className="bg-[#453D36] border border-white/10 rounded-lg p-5 mb-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
@@ -161,7 +161,7 @@ export default function FounderInsights() {
             </div>
             <div>
               <h3 className="font-semibold">Recovery Score</h3>
-              <p className="text-xs text-white/50">Based on HRV & sleep</p>
+              <p className="text-xs text-[#9a948a]">Based on HRV & sleep</p>
             </div>
           </div>
           <div className="text-right">
@@ -172,30 +172,30 @@ export default function FounderInsights() {
 
         <div className="grid grid-cols-3 gap-3">
           <div className="bg-white/5 rounded-xl p-3">
-            <p className="text-xs text-white/50 mb-1">HRV</p>
+            <p className="text-xs text-[#9a948a] mb-1">HRV</p>
             <p className="text-lg font-bold">62ms</p>
           </div>
           <div className="bg-white/5 rounded-xl p-3">
-            <p className="text-xs text-white/50 mb-1">Resting HR</p>
+            <p className="text-xs text-[#9a948a] mb-1">Resting HR</p>
             <p className="text-lg font-bold">58 bpm</p>
           </div>
           <div className="bg-white/5 rounded-xl p-3">
-            <p className="text-xs text-white/50 mb-1">Deep Sleep</p>
+            <p className="text-xs text-[#9a948a] mb-1">Deep Sleep</p>
             <p className="text-lg font-bold">1.8h</p>
           </div>
         </div>
       </div>
 
       {/* Performance Trend */}
-      <div className="bg-[#1A1A25] border border-white/10 rounded-2xl p-5 mb-6">
+      <div className="bg-[#453D36] border border-white/10 rounded-lg p-5 mb-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#8B5CF6]/10 flex items-center justify-center">
-              <TrendingUp className="w-5 h-5 text-[#8B5CF6]" />
+            <div className="w-10 h-10 rounded-xl bg-[#5C7568]/10 flex items-center justify-center">
+              <TrendingUp className="w-5 h-5 text-[#5C7568]" />
             </div>
             <div>
               <h3 className="font-semibold">Weekly Performance</h3>
-              <p className="text-xs text-white/50">Founder Score trend</p>
+              <p className="text-xs text-[#9a948a]">Founder Score trend</p>
             </div>
           </div>
           <div className="text-right">
@@ -224,9 +224,9 @@ export default function FounderInsights() {
               <Line
                 type="monotone"
                 dataKey="score"
-                stroke="#8B5CF6"
+                stroke="#5C7568"
                 strokeWidth={3}
-                dot={{ fill: '#8B5CF6', r: 4 }}
+                dot={{ fill: '#5C7568', r: 4 }}
               />
             </LineChart>
           </ResponsiveContainer>
@@ -235,7 +235,7 @@ export default function FounderInsights() {
 
       {/* Key Insights */}
       <div>
-        <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-4">
+        <h3 className="text-xs font-semibold text-[#9a948a] uppercase tracking-wide mb-4">
           Key Insights
         </h3>
         <div className="space-y-3">
@@ -244,7 +244,7 @@ export default function FounderInsights() {
             return (
               <div
                 key={index}
-                className={`bg-[#1A1A25] border rounded-xl p-4 ${
+                className={`bg-[#453D36] border rounded-xl p-4 ${
                   insight.positive ? "border-white/10" : "border-orange-500/20"
                 }`}
               >
@@ -265,7 +265,7 @@ export default function FounderInsights() {
                         {insight.trend}
                       </span>
                     </div>
-                    <p className="text-xs text-white/60 leading-relaxed">
+                    <p className="text-xs text-[#9a948a] leading-relaxed">
                       {insight.description}
                     </p>
                   </div>
@@ -277,22 +277,22 @@ export default function FounderInsights() {
       </div>
 
       {/* Integration Status */}
-      <div className="mt-6 bg-gradient-to-br from-[#1A1A25] to-[#151520] border border-white/10 rounded-2xl p-5">
+      <div className="mt-6 bg-gradient-to-br from-[#453D36] to-[#332C26] border border-white/10 rounded-lg p-5">
         <div className="flex items-center gap-3 mb-3">
-          <Activity className="w-5 h-5 text-[#3B82F6]" />
+          <Activity className="w-5 h-5 text-[#6B9080]" />
           <h3 className="font-semibold">Connected Integrations</h3>
         </div>
         <div className="space-y-2">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-white/60">Apple Health</span>
+            <span className="text-[#9a948a]">Apple Health</span>
             <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
           </div>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-white/60">Google Calendar</span>
+            <span className="text-[#9a948a]">Google Calendar</span>
             <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
           </div>
           <div className="flex items-center justify-between text-sm">
-            <span className="text-white/60">Whoop / Oura</span>
+            <span className="text-[#9a948a]">Whoop / Oura</span>
             <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
           </div>
         </div>

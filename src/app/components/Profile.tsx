@@ -25,11 +25,11 @@ export default function Profile() {
   ];
 
   return (
-    <div className="min-h-full bg-gradient-to-b from-[#0F0F14] via-[#0F0F14] to-[#1A0F1E] dark:bg-gradient-to-b dark:from-[#0F0F14] dark:via-[#0F0F14] dark:to-[#1A0F1E] bg-white text-gray-900 dark:text-white px-6 pt-14 pb-6">
+    <div className="min-h-full bg-gradient-to-b from-[#0F1117] via-[#0F1117] to-[#12151D] dark:bg-gradient-to-b dark:from-[#0F1117] dark:via-[#0F1117] dark:to-[#12151D] bg-white text-gray-900 dark:text-white px-6 pt-14 pb-6">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-bold tracking-tight">Profile</h1>
+          <h1 className="font-heading text-3xl tracking-tight text-[#EDE8DF]">Profile</h1>
           <button 
             onClick={() => setShowSettings(true)}
             className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
@@ -39,9 +39,9 @@ export default function Profile() {
         </div>
         
         {/* User Card */}
-        <div className="bg-gradient-to-br from-[#1A1A25] to-[#151520] border border-white/10 rounded-2xl p-6">
+        <div className="bg-gradient-to-br from-[#161922] to-[#12151D] border border-white/10 rounded-lg p-6">
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] flex items-center justify-center text-2xl font-bold">
+            <div className="w-20 h-20 rounded-lg bg-gradient-to-br from-[#6B9080] to-[#5C7568] flex items-center justify-center text-2xl font-bold">
               SC
             </div>
             <div className="flex-1">
@@ -62,12 +62,12 @@ export default function Profile() {
           <div className="bg-[#141419] border border-white/10 rounded-xl p-4">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6B9080] to-[#5C7568] flex items-center justify-center">
                   <Trophy className="w-5 h-5" />
                 </div>
                 <div>
                   <p className="text-xs text-white/50">Founder Score</p>
-                  <p className="font-bold text-2xl bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] bg-clip-text text-transparent">
+                  <p className="font-bold text-2xl bg-gradient-to-r from-[#6B9080] to-[#5C7568] bg-clip-text text-transparent">
                     87
                   </p>
                 </div>
@@ -80,7 +80,7 @@ export default function Profile() {
               </div>
             </div>
             <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full w-[87%] bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] rounded-full" />
+              <div className="h-full w-[87%] bg-gradient-to-r from-[#6B9080] to-[#5C7568] rounded-full" />
             </div>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default function Profile() {
           {stats.map((stat) => {
             const Icon = stat.icon;
             return (
-              <div key={stat.label} className="bg-[#1A1A25] border border-white/10 rounded-xl p-4">
+              <div key={stat.label} className="bg-[#161922] border border-white/10 rounded-xl p-4">
                 <Icon className="w-5 h-5 text-white/40 mb-3" />
                 <p className="text-2xl font-bold mb-1">{stat.value}</p>
                 <p className="text-xs text-white/50">{stat.label}</p>
@@ -106,9 +106,9 @@ export default function Profile() {
       </div>
 
       {/* Progress Indicators */}
-      <div className="bg-[#1A1A25] border border-white/10 rounded-2xl p-5 mb-6">
+      <div className="bg-[#161922] border border-white/10 rounded-lg p-5 mb-6">
         <h3 className="font-semibold mb-4 flex items-center gap-2">
-          <TrendingUp className="w-5 h-5 text-[#3B82F6]" />
+          <TrendingUp className="w-5 h-5 text-[#6B9080]" />
           This Week's Progress
         </h3>
         
@@ -119,7 +119,7 @@ export default function Profile() {
               <span className="text-sm font-semibold">92/100</span>
             </div>
             <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full w-[92%] bg-gradient-to-r from-[#3B82F6] to-[#2563EB] rounded-full" />
+              <div className="h-full w-[92%] bg-gradient-to-r from-[#6B9080] to-[#4F6D5F] rounded-full" />
             </div>
           </div>
 
@@ -139,7 +139,7 @@ export default function Profile() {
               <span className="text-sm font-semibold">89%</span>
             </div>
             <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full w-[89%] bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] rounded-full" />
+              <div className="h-full w-[89%] bg-gradient-to-r from-[#5C7568] to-[#4A5E52] rounded-full" />
             </div>
           </div>
         </div>
@@ -154,11 +154,11 @@ export default function Profile() {
           {activityHistory.map((activity, index) => (
             <div
               key={index}
-              className="bg-[#1A1A25] border border-white/10 rounded-xl p-4 flex items-start gap-3"
+              className="bg-[#161922] border border-white/10 rounded-xl p-4 flex items-start gap-3"
             >
               <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0 mt-0.5">
-                {activity.type === "Signal Post" && <Radio className="w-4 h-4 text-[#3B82F6]" />}
-                {activity.type === "Founder Match" && <Users className="w-4 h-4 text-[#8B5CF6]" />}
+                {activity.type === "Signal Post" && <Radio className="w-4 h-4 text-[#6B9080]" />}
+                {activity.type === "Founder Match" && <Users className="w-4 h-4 text-[#5C7568]" />}
                 {activity.type === "Insight" && <Activity className="w-4 h-4 text-emerald-500" />}
               </div>
               <div className="flex-1">
@@ -174,22 +174,22 @@ export default function Profile() {
       </div>
 
       {/* Achievements */}
-      <div className="bg-gradient-to-br from-[#1A1A25] to-[#151520] border border-white/10 rounded-2xl p-5">
+      <div className="bg-gradient-to-br from-[#161922] to-[#12151D] border border-white/10 rounded-lg p-5">
         <div className="flex items-center gap-2 mb-4">
-          <Award className="w-5 h-5 text-[#8B5CF6]" />
+          <Award className="w-5 h-5 text-[#5C7568]" />
           <h3 className="font-semibold">Achievements</h3>
         </div>
         
         <div className="grid grid-cols-4 gap-3">
           <div className="flex flex-col items-center">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#3B82F6] to-[#2563EB] flex items-center justify-center mb-2">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#6B9080] to-[#4F6D5F] flex items-center justify-center mb-2">
               <Radio className="w-6 h-6" />
             </div>
             <span className="text-[10px] text-white/60 text-center">Active Sharer</span>
           </div>
 
           <div className="flex flex-col items-center">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED] flex items-center justify-center mb-2">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5C7568] to-[#4A5E52] flex items-center justify-center mb-2">
               <Users className="w-6 h-6" />
             </div>
             <span className="text-[10px] text-white/60 text-center">Connector</span>
@@ -214,7 +214,7 @@ export default function Profile() {
       {/* Settings Modal */}
       {showSettings && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-end">
-          <div className="bg-[#0F0F14] w-full max-h-[85vh] rounded-t-3xl overflow-hidden flex flex-col">
+          <div className="bg-[#0F1117] w-full max-h-[85vh] rounded-t-3xl overflow-hidden flex flex-col">
             {/* Modal Header */}
             <div className="p-6 border-b border-white/10 flex items-center justify-between">
               <h3 className="font-bold text-lg">Settings</h3>
@@ -267,7 +267,7 @@ export default function Profile() {
                     onClick={() => !linkedInConnected && setLinkedInConnected(true)}
                     className={`w-full p-4 rounded-xl border transition-all text-left ${
                       linkedInConnected
-                        ? "bg-gradient-to-br from-blue-500/10 to-blue-600/10 border-blue-500/30"
+                        ? "bg-gradient-to-br from-[#6B9080]/10 to-[#5C7568]/10 border-[#6B9080]/30"
                         : "bg-white/5 dark:bg-white/5 bg-gray-100 border-white/10 dark:border-white/10 border-gray-200"
                     }`}
                   >
@@ -341,10 +341,10 @@ export default function Profile() {
             </div>
 
             {/* Footer */}
-            <div className="p-6 border-t border-white/10 bg-[#1A1A25]">
+            <div className="p-6 border-t border-white/10 bg-[#161922]">
               <button
                 onClick={() => setShowSettings(false)}
-                className="w-full py-3 bg-[#3B82F6] hover:bg-[#2563EB] rounded-xl font-semibold transition-colors"
+                className="w-full py-3 bg-[#6B9080] hover:bg-[#4F6D5F] rounded-xl font-semibold transition-colors"
               >
                 Save Changes
               </button>

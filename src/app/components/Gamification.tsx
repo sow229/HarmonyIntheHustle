@@ -178,27 +178,27 @@ export default function Gamification() {
   const getRarityColor = (rarity: Achievement["rarity"]) => {
     switch (rarity) {
       case "common": return "text-white/60 border-white/20 bg-white/5";
-      case "rare": return "text-blue-400 border-blue-500/30 bg-blue-500/10";
-      case "epic": return "text-purple-400 border-purple-500/30 bg-purple-500/10";
+      case "rare": return "text-[#8A9B8F] border-[#6B9080]/30 bg-[#6B9080]/10";
+      case "epic": return "text-[#C4A882] border-[#C4A882]/30 bg-[#C4A882]/10";
       case "legendary": return "text-amber-400 border-amber-500/30 bg-amber-500/10";
     }
   };
 
   return (
-    <div className="min-h-full bg-[#0F0F14] text-white px-6 pt-14 pb-6">
+    <div className="min-h-full bg-[#0F1117] text-[#EDE8DF] px-6 pt-14 pb-6">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Level Up</h1>
+        <h1 className="font-heading text-3xl tracking-tight mb-2 text-[#EDE8DF]">Level Up</h1>
         <p className="text-sm text-white/50">Track your founder journey</p>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 mb-6 bg-[#1A1A25] border border-white/10 rounded-xl p-1">
+      <div className="flex gap-2 mb-6 bg-[#161922] border border-white/10 rounded-xl p-1">
         <button
           onClick={() => setActiveTab("overview")}
           className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${
             activeTab === "overview"
-              ? "bg-[#3B82F6] text-white"
+              ? "bg-[#6B9080] text-white"
               : "text-white/60 hover:text-white"
           }`}
         >
@@ -208,7 +208,7 @@ export default function Gamification() {
           onClick={() => setActiveTab("achievements")}
           className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${
             activeTab === "achievements"
-              ? "bg-[#3B82F6] text-white"
+              ? "bg-[#6B9080] text-white"
               : "text-white/60 hover:text-white"
           }`}
         >
@@ -218,7 +218,7 @@ export default function Gamification() {
           onClick={() => setActiveTab("leaderboard")}
           className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${
             activeTab === "leaderboard"
-              ? "bg-[#3B82F6] text-white"
+              ? "bg-[#6B9080] text-white"
               : "text-white/60 hover:text-white"
           }`}
         >
@@ -230,18 +230,18 @@ export default function Gamification() {
       {activeTab === "overview" && (
         <div className="space-y-6">
           {/* Level Progress */}
-          <div className="bg-gradient-to-br from-[#1A1A25] to-[#151520] border border-white/10 rounded-2xl p-6">
+          <div className="bg-gradient-to-br from-[#161922] to-[#12151D] border border-white/10 rounded-lg p-6">
             <div className="flex items-center justify-between mb-6">
               <div>
                 <p className="text-xs text-white/50 mb-1">Current Level</p>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-bold bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] bg-clip-text text-transparent">
+                  <span className="text-4xl font-bold bg-gradient-to-r from-[#6B9080] to-[#5C7568] bg-clip-text text-transparent">
                     {userLevel}
                   </span>
                   <span className="text-lg text-white/40">/ 50</span>
                 </div>
               </div>
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] flex items-center justify-center">
+              <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-[#6B9080] to-[#5C7568] flex items-center justify-center">
                 <Zap className="w-8 h-8 fill-white" />
               </div>
             </div>
@@ -252,7 +252,7 @@ export default function Gamification() {
               </div>
               <div className="h-3 bg-white/5 rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] rounded-full transition-all duration-500"
+                  className="h-full bg-gradient-to-r from-[#6B9080] to-[#5C7568] rounded-full transition-all duration-500"
                   style={{ width: `${(userPoints / pointsToNextLevel) * 100}%` }}
                 />
               </div>
@@ -264,7 +264,7 @@ export default function Gamification() {
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-[#1A1A25] border border-white/10 rounded-xl p-5">
+            <div className="bg-[#161922] border border-white/10 rounded-xl p-5">
               <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center mb-3">
                 <Flame className="w-5 h-5 text-orange-400" />
               </div>
@@ -273,25 +273,25 @@ export default function Gamification() {
               <p className="text-xs text-emerald-400 mt-1">+{currentStreak * 10} FounderBucks</p>
             </div>
 
-            <div className="bg-[#1A1A25] border border-white/10 rounded-xl p-5">
-              <div className="w-10 h-10 rounded-xl bg-[#8B5CF6]/10 flex items-center justify-center mb-3">
-                <Trophy className="w-5 h-5 text-[#8B5CF6]" />
+            <div className="bg-[#161922] border border-white/10 rounded-xl p-5">
+              <div className="w-10 h-10 rounded-xl bg-[#5C7568]/10 flex items-center justify-center mb-3">
+                <Trophy className="w-5 h-5 text-[#5C7568]" />
               </div>
               <p className="text-2xl font-bold mb-1">{achievements.filter(a => a.unlocked).length}</p>
               <p className="text-xs text-white/50">Achievements</p>
               <p className="text-xs text-white/40 mt-1">of {achievements.length}</p>
             </div>
 
-            <div className="bg-[#1A1A25] border border-white/10 rounded-xl p-5">
-              <div className="w-10 h-10 rounded-xl bg-[#3B82F6]/10 flex items-center justify-center mb-3">
-                <Target className="w-5 h-5 text-[#3B82F6]" />
+            <div className="bg-[#161922] border border-white/10 rounded-xl p-5">
+              <div className="w-10 h-10 rounded-xl bg-[#6B9080]/10 flex items-center justify-center mb-3">
+                <Target className="w-5 h-5 text-[#6B9080]" />
               </div>
               <p className="text-2xl font-bold mb-1">{userPoints}</p>
               <p className="text-xs text-white/50">Total FounderBucks</p>
               <p className="text-xs text-white/40 mt-1">All time</p>
             </div>
 
-            <div className="bg-[#1A1A25] border border-white/10 rounded-xl p-5">
+            <div className="bg-[#161922] border border-white/10 rounded-xl p-5">
               <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center mb-3">
                 <Crown className="w-5 h-5 text-amber-400" />
               </div>
@@ -363,7 +363,7 @@ export default function Gamification() {
                       )}
                     </div>
                     {!isLocked && (
-                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-white/30 rounded-full flex items-center justify-center border-2 border-[#0F0F14]">
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-white/30 rounded-full flex items-center justify-center border-2 border-[#0F1117]">
                         <CheckCircle2 className="w-3 h-3 text-white" />
                       </div>
                     )}
@@ -396,7 +396,7 @@ export default function Gamification() {
                     </div>
                     <div className="h-2 bg-white/5 rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] rounded-full transition-all duration-500"
+                        className="h-full bg-gradient-to-r from-[#6B9080] to-[#5C7568] rounded-full transition-all duration-500"
                         style={{ width: `${(achievement.progress / achievement.total) * 100}%` }}
                       />
                     </div>
@@ -416,8 +416,8 @@ export default function Gamification() {
               key={user.rank}
               className={`border rounded-xl p-4 transition-all ${
                 user.isCurrentUser
-                  ? "bg-gradient-to-br from-[#3B82F6]/10 to-[#8B5CF6]/10 border-[#3B82F6]/30"
-                  : "bg-[#1A1A25] border-white/10"
+                  ? "bg-gradient-to-br from-[#6B9080]/10 to-[#5C7568]/10 border-[#6B9080]/30"
+                  : "bg-[#161922] border-white/10"
               }`}
             >
               <div className="flex items-center gap-4">
@@ -452,7 +452,7 @@ export default function Gamification() {
                   <div className="flex items-center gap-2 mb-1">
                     <p className="font-semibold truncate">{user.name}</p>
                     {user.isCurrentUser && (
-                      <span className="px-2 py-0.5 bg-[#3B82F6] rounded text-xs font-medium">
+                      <span className="px-2 py-0.5 bg-[#6B9080] rounded text-xs font-medium">
                         You
                       </span>
                     )}

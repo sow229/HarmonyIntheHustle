@@ -36,9 +36,9 @@ export default function HealthInsights() {
       description: "Sleep recovery improved consistency by 21%",
       trend: "+21%",
       positive: true,
-      color: "from-[#3B82F6] to-[#2563EB]",
-      iconBg: "bg-[#3B82F6]/10",
-      iconColor: "text-[#3B82F6]"
+      color: "from-[#6B9080] to-[#4F6D5F]",
+      iconBg: "bg-[#6B9080]/10",
+      iconColor: "text-[#6B9080]"
     },
     {
       icon: Calendar,
@@ -63,7 +63,7 @@ export default function HealthInsights() {
   ];
 
   return (
-    <div className="min-h-full bg-gradient-to-b from-[#0F0F14] via-[#0F0F14] to-[#0F1A14] dark:bg-gradient-to-b dark:from-[#0F0F14] dark:via-[#0F0F14] dark:to-[#0F1A14] bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50 text-gray-900 dark:text-white px-6 pt-14 pb-6 relative overflow-hidden">
+    <div className="min-h-full bg-gradient-to-b from-[#0F1117] via-[#0F1117] to-[#101318] dark:bg-gradient-to-b dark:from-[#0F1117] dark:via-[#0F1117] dark:to-[#101318] text-[#EDE8DF] px-6 pt-14 pb-6 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -72,7 +72,7 @@ export default function HealthInsights() {
             opacity: [0.2, 0.4, 0.2]
           }}
           transition={{ duration: 18, repeat: Infinity }}
-          className="absolute top-20 right-10 w-64 h-64 bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 dark:from-emerald-500/20 dark:to-cyan-500/20 from-emerald-300/30 to-cyan-300/30 rounded-full blur-3xl"
+          className="absolute top-20 right-10 w-64 h-64 bg-gradient-to-br from-[#6B9080]/15 to-[#5C7568]/12 rounded-full blur-3xl"
         />
         <motion.div
           animate={{
@@ -80,13 +80,13 @@ export default function HealthInsights() {
             opacity: [0.3, 0.5, 0.3]
           }}
           transition={{ duration: 15, repeat: Infinity }}
-          className="absolute bottom-20 left-10 w-56 h-56 bg-gradient-to-tr from-[#3B82F6]/20 to-[#8B5CF6]/20 dark:from-[#3B82F6]/20 dark:to-[#8B5CF6]/20 from-blue-300/30 to-purple-300/30 rounded-full blur-3xl"
+          className="absolute bottom-20 left-10 w-56 h-56 bg-gradient-to-tr from-[#6B9080]/20 to-[#5C7568]/20 dark:from-[#6B9080]/20 dark:to-[#5C7568]/20 from-[#5C7568]/10 to-[#6B9080]/8 rounded-full blur-3xl"
         />
       </div>
 
       {/* Header */}
       <div className="mb-8 relative z-10">
-        <h1 className="text-3xl font-bold tracking-tight mb-2 bg-gradient-to-r from-emerald-500 via-[#3B82F6] to-[#8B5CF6] bg-clip-text text-transparent">
+        <h1 className="font-heading text-3xl tracking-tight mb-2 gradient-heading">
           Health Insights
         </h1>
         <p className="text-sm text-white/50 dark:text-white/50 text-gray-600">Health & performance analytics</p>
@@ -100,8 +100,8 @@ export default function HealthInsights() {
           onClick={() => !googleCalendarConnected && setGoogleCalendarConnected(true)}
           className={`p-4 rounded-xl border transition-all relative overflow-hidden ${
             googleCalendarConnected
-              ? "bg-gradient-to-br from-[#1A1A25] to-[#151520] dark:from-[#1A1A25] dark:to-[#151520] from-emerald-50 to-emerald-100 border-emerald-500/30 dark:border-emerald-500/30 border-emerald-400/50 shadow-lg shadow-emerald-500/20"
-              : "bg-white/5 dark:bg-white/5 bg-gray-100 border-white/10 dark:border-white/10 border-gray-200 hover:border-[#3B82F6]/30 dark:hover:border-[#3B82F6]/30 hover:border-blue-400/40 hover:shadow-md"
+              ? "bg-gradient-to-br from-[#161922] to-[#12151D] dark:from-[#161922] dark:to-[#12151D] from-emerald-50 to-emerald-100 border-emerald-500/30 dark:border-emerald-500/30 border-emerald-400/50 shadow-lg shadow-emerald-500/20"
+              : "bg-white/5 dark:bg-white/5 bg-gray-100 border-white/10 dark:border-white/10 border-gray-200 hover:border-[#6B9080]/30 dark:hover:border-[#6B9080]/30 hover:border-[#6B9080]/40 hover:shadow-md"
           }`}
         >
           {googleCalendarConnected && (
@@ -127,15 +127,15 @@ export default function HealthInsights() {
           onClick={() => !linkedInConnected && setLinkedInConnected(true)}
           className={`p-4 rounded-xl border transition-all relative overflow-hidden ${
             linkedInConnected
-              ? "bg-gradient-to-br from-[#1A1A25] to-[#151520] dark:from-[#1A1A25] dark:to-[#151520] from-blue-50 to-blue-100 border-[#0A66C2]/30 dark:border-[#0A66C2]/30 border-blue-500/50 shadow-lg shadow-blue-500/20"
-              : "bg-white/5 dark:bg-white/5 bg-gray-100 border-white/10 dark:border-white/10 border-gray-200 hover:border-[#0A66C2]/30 dark:hover:border-[#0A66C2]/30 hover:border-blue-400/40 hover:shadow-md"
+              ? "bg-gradient-to-br from-[#161922] to-[#12151D] dark:from-[#161922] dark:to-[#12151D] from-[#161922] to-[#12151D] border-[#0A66C2]/30 shadow-lg shadow-[#0A66C2]/15"
+              : "bg-white/5 dark:bg-white/5 bg-gray-100 border-white/10 dark:border-white/10 border-gray-200 hover:border-[#0A66C2]/30 dark:hover:border-[#0A66C2]/30 hover:border-[#6B9080]/40 hover:shadow-md"
           }`}
         >
           {linkedInConnected && (
             <motion.div
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-0 bg-gradient-to-r from-[#0A66C2]/10 via-transparent to-[#0A66C2]/10 dark:from-[#0A66C2]/10 dark:via-transparent dark:to-[#0A66C2]/10 from-blue-500/20 via-transparent to-blue-500/20"
+              className="absolute inset-0 bg-gradient-to-r from-[#0A66C2]/10 via-transparent to-[#0A66C2]/10 dark:from-[#0A66C2]/10 dark:via-transparent dark:to-[#0A66C2]/10 from-[#0A66C2]/15 via-transparent to-[#0A66C2]/15"
             />
           )}
           <div className="flex items-center gap-2 mb-2">
@@ -157,12 +157,12 @@ export default function HealthInsights() {
           scale: 1.02,
           boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.4)"
         }}
-        className="bg-gradient-to-br from-[#1A1A25] to-[#151520] dark:from-[#1A1A25] dark:to-[#151520] from-blue-50 to-cyan-50 border border-white/10 dark:border-white/10 border-blue-200/50 rounded-2xl p-5 mb-4 shadow-lg shadow-[#3B82F6]/10 dark:shadow-[#3B82F6]/10 shadow-blue-500/20 relative z-10 hover:border-[#3B82F6]/40 dark:hover:border-[#3B82F6]/40 hover:border-blue-400/60 transition-all"
+        className="bg-gradient-to-br from-[#161922] to-[#12151D] dark:from-[#161922] dark:to-[#12151D] border border-[rgba(237,232,223,0.1)] rounded-lg p-5 mb-4 shadow-lg shadow-[#6B9080]/10 dark:shadow-[#6B9080]/10 shadow-black/15 relative z-10 hover:border-[#6B9080]/40 dark:hover:border-[#6B9080]/40 hover:border-[#6B9080]/50 transition-all"
       >
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#3B82F6]/20 to-[#2563EB]/20 flex items-center justify-center">
-              <Moon className="w-5 h-5 text-[#3B82F6]" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6B9080]/20 to-[#4F6D5F]/20 flex items-center justify-center">
+              <Moon className="w-5 h-5 text-[#6B9080]" />
             </div>
             <div>
               <h3 className="font-semibold">Sleep Duration</h3>
@@ -180,8 +180,8 @@ export default function HealthInsights() {
             <AreaChart data={sleepData}>
               <defs>
                 <linearGradient id="sleepGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#6B9080" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#6B9080" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <XAxis
@@ -201,7 +201,7 @@ export default function HealthInsights() {
               <Area
                 type="monotone"
                 dataKey="hours"
-                stroke="#3B82F6"
+                stroke="#6B9080"
                 strokeWidth={2}
                 fill="url(#sleepGradient)"
                 isAnimationActive={false}
@@ -220,12 +220,12 @@ export default function HealthInsights() {
           scale: 1.02,
           boxShadow: "0 25px 50px -12px rgba(139, 92, 246, 0.4)"
         }}
-        className="bg-gradient-to-br from-[#1A1A25] to-[#151520] dark:from-[#1A1A25] dark:to-[#151520] from-purple-50 to-indigo-50 border border-white/10 dark:border-white/10 border-purple-200/50 rounded-2xl p-5 mb-4 shadow-lg shadow-[#8B5CF6]/10 dark:shadow-[#8B5CF6]/10 shadow-purple-500/20 relative z-10 hover:border-[#8B5CF6]/40 dark:hover:border-[#8B5CF6]/40 hover:border-purple-400/60 transition-all"
+        className="bg-gradient-to-br from-[#161922] to-[#12151D] dark:from-[#161922] dark:to-[#12151D] border border-[rgba(237,232,223,0.1)] rounded-lg p-5 mb-4 shadow-lg shadow-[#5C7568]/10 dark:shadow-[#5C7568]/10 shadow-black/15 relative z-10 hover:border-[#5C7568]/40 dark:hover:border-[#5C7568]/40 hover:border-[#6B9080]/50 transition-all"
       >
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#8B5CF6]/20 to-[#7C3AED]/20 flex items-center justify-center">
-              <Calendar className="w-5 h-5 text-[#8B5CF6]" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#5C7568]/20 to-[#4A5E52]/20 flex items-center justify-center">
+              <Calendar className="w-5 h-5 text-[#5C7568]" />
             </div>
             <div>
               <h3 className="font-semibold">Meeting Load</h3>
@@ -263,7 +263,7 @@ export default function HealthInsights() {
           scale: 1.02,
           boxShadow: "0 25px 50px -12px rgba(16, 185, 129, 0.4)"
         }}
-        className="bg-gradient-to-br from-[#1A1A25] to-[#151520] dark:from-[#1A1A25] dark:to-[#151520] from-emerald-50 to-green-50 border border-white/10 dark:border-white/10 border-emerald-200/50 rounded-2xl p-5 mb-4 shadow-lg shadow-emerald-500/10 dark:shadow-emerald-500/10 shadow-emerald-500/20 relative z-10 hover:border-emerald-500/40 dark:hover:border-emerald-500/40 hover:border-emerald-400/60 transition-all"
+        className="bg-gradient-to-br from-[#161922] to-[#12151D] dark:from-[#161922] dark:to-[#12151D] from-emerald-50 to-green-50 border border-white/10 dark:border-white/10 border-emerald-200/50 rounded-lg p-5 mb-4 shadow-lg shadow-emerald-500/10 dark:shadow-emerald-500/10 shadow-emerald-500/20 relative z-10 hover:border-emerald-500/40 dark:hover:border-emerald-500/40 hover:border-emerald-400/60 transition-all"
       >
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
@@ -306,12 +306,12 @@ export default function HealthInsights() {
           scale: 1.02,
           boxShadow: "0 25px 50px -12px rgba(139, 92, 246, 0.4)"
         }}
-        className="bg-gradient-to-br from-[#1A1A25] to-[#151520] dark:from-[#1A1A25] dark:to-[#151520] from-gradient-to-br from-purple-50 via-pink-50 to-purple-100 border border-white/10 dark:border-white/10 border-purple-200/50 rounded-2xl p-5 mb-6 shadow-lg shadow-[#8B5CF6]/10 dark:shadow-[#8B5CF6]/10 shadow-purple-500/20 relative z-10 hover:border-[#8B5CF6]/40 dark:hover:border-[#8B5CF6]/40 hover:border-purple-400/60 transition-all"
+        className="bg-gradient-to-br from-[#161922] to-[#12151D] dark:from-[#161922] dark:to-[#12151D] border border-[rgba(237,232,223,0.1)] rounded-lg p-5 mb-6 shadow-lg shadow-[#5C7568]/10 dark:shadow-[#5C7568]/10 shadow-black/15 relative z-10 hover:border-[#5C7568]/40 dark:hover:border-[#5C7568]/40 hover:border-[#6B9080]/50 transition-all"
       >
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#8B5CF6]/20 to-[#EC4899]/20 flex items-center justify-center">
-              <TrendingUp className="w-5 h-5 text-[#8B5CF6]" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#5C7568]/20 to-[#8A9B8F]/20 flex items-center justify-center">
+              <TrendingUp className="w-5 h-5 text-[#5C7568]" />
             </div>
             <div>
               <h3 className="font-semibold">Weekly Performance</h3>
@@ -329,8 +329,8 @@ export default function HealthInsights() {
             <LineChart data={performanceData}>
               <defs>
                 <linearGradient id="performanceGradient" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#8B5CF6" />
-                  <stop offset="100%" stopColor="#EC4899" />
+                  <stop offset="0%" stopColor="#5C7568" />
+                  <stop offset="100%" stopColor="#8A9B8F" />
                 </linearGradient>
               </defs>
               <XAxis
@@ -352,7 +352,7 @@ export default function HealthInsights() {
                 dataKey="score"
                 stroke="url(#performanceGradient)"
                 strokeWidth={3}
-                dot={{ fill: '#8B5CF6', r: 4 }}
+                dot={{ fill: '#5C7568', r: 4 }}
                 isAnimationActive={false}
               />
             </LineChart>
@@ -381,7 +381,7 @@ export default function HealthInsights() {
                     ? "0 10px 30px -5px rgba(16, 185, 129, 0.3)"
                     : "0 10px 30px -5px rgba(249, 115, 22, 0.3)"
                 }}
-                className={`bg-gradient-to-br from-[#1A1A25] to-[#151520] dark:from-[#1A1A25] dark:to-[#151520] ${
+                className={`bg-gradient-to-br from-[#161922] to-[#12151D] dark:from-[#161922] dark:to-[#12151D] ${
                   insight.positive
                     ? "from-emerald-50 to-green-50 border-white/10 dark:border-white/10 border-emerald-200/50"
                     : "from-orange-50 to-red-50 border-orange-500/20 dark:border-orange-500/20 border-orange-300/50"
@@ -427,10 +427,10 @@ export default function HealthInsights() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
         whileHover={{ scale: 1.02 }}
-        className="mt-6 bg-gradient-to-br from-[#1A1A25] to-[#151520] dark:from-[#1A1A25] dark:to-[#151520] from-blue-50 to-cyan-50 border border-white/10 dark:border-white/10 border-blue-200/50 rounded-2xl p-5 relative z-10 shadow-lg shadow-[#3B82F6]/10 dark:shadow-[#3B82F6]/10 shadow-blue-500/20 hover:border-[#3B82F6]/30 dark:hover:border-[#3B82F6]/30 hover:border-blue-400/50 transition-all"
+        className="mt-6 bg-gradient-to-br from-[#161922] to-[#12151D] dark:from-[#161922] dark:to-[#12151D] border border-[rgba(237,232,223,0.1)] rounded-lg p-5 relative z-10 shadow-lg shadow-[#6B9080]/10 dark:shadow-[#6B9080]/10 shadow-black/15 hover:border-[#6B9080]/30 dark:hover:border-[#6B9080]/30 hover:border-[#6B9080]/40 transition-all"
       >
         <div className="flex items-center gap-3 mb-3">
-          <Activity className="w-5 h-5 text-[#3B82F6]" />
+          <Activity className="w-5 h-5 text-[#6B9080]" />
           <h3 className="font-semibold">Connected Integrations</h3>
         </div>
         <div className="space-y-2">

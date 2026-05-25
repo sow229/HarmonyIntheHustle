@@ -57,40 +57,40 @@ export default function MentorUnlock() {
   const lockedMentors = mentors.filter(m => !m.unlocked);
 
   return (
-    <div className="min-h-full bg-[#0F0F14] text-white px-6 pt-14 pb-6">
+    <div className="min-h-full bg-[#0F1117] text-[#EDE8DF] px-6 pt-14 pb-6">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight mb-2">Mentors</h1>
-        <p className="text-white/50">Learn from the best in Silicon Valley</p>
+        <p className="text-[#9a948a]">Learn from the best in Silicon Valley</p>
       </div>
 
       {/* Progress Banner */}
-      <div className="bg-gradient-to-br from-[#1A1A25] to-[#151520] border border-white/10 rounded-2xl p-5 mb-8">
+      <div className="bg-gradient-to-br from-[#453D36] to-[#332C26] border border-white/10 rounded-lg p-5 mb-8">
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 rounded-xl bg-[#8B5CF6]/20 flex items-center justify-center">
-            <Crown className="w-5 h-5 text-[#8B5CF6]" />
+          <div className="w-10 h-10 rounded-xl bg-[#5C7568]/20 flex items-center justify-center">
+            <Crown className="w-5 h-5 text-[#5C7568]" />
           </div>
           <div>
-            <p className="text-xs text-white/50">Unlock More Mentors</p>
+            <p className="text-xs text-[#9a948a]">Unlock More Mentors</p>
             <p className="font-semibold">Reach Operator Tier (32% away)</p>
           </div>
         </div>
         <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-          <div className="h-full w-[68%] bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] rounded-full" />
+          <div className="h-full w-[68%] bg-gradient-to-r from-[#6B9080] to-[#5C7568] rounded-full" />
         </div>
       </div>
 
       {/* Unlocked Mentors */}
       {unlockedMentors.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-4">
+          <h2 className="text-xs font-semibold text-[#9a948a] uppercase tracking-wide mb-4">
             Available Now
           </h2>
           <div className="space-y-3">
             {unlockedMentors.map((mentor) => (
               <button
                 key={mentor.name}
-                className="w-full bg-[#1A1A25] border border-white/10 rounded-2xl p-4 hover:border-[#3B82F6]/50 transition-all text-left"
+                className="w-full bg-[#453D36] border border-white/10 rounded-lg p-4 hover:border-[#6B9080]/50 transition-all text-left"
               >
                 <div className="flex items-center gap-4">
                   <div className="relative">
@@ -99,23 +99,23 @@ export default function MentorUnlock() {
                       alt={mentor.name}
                       className="w-16 h-16 rounded-xl object-cover"
                     />
-                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center border-2 border-[#1A1A25]">
+                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center border-2 border-[#453D36]">
                       <div className="w-2 h-2 rounded-full bg-white" />
                     </div>
                   </div>
                   
                   <div className="flex-1">
                     <h3 className="font-semibold mb-1">{mentor.name}</h3>
-                    <p className="text-sm text-white/50 mb-2">{mentor.title}</p>
-                    <p className="text-xs text-white/40">{mentor.company}</p>
+                    <p className="text-sm text-[#9a948a] mb-2">{mentor.title}</p>
+                    <p className="text-xs text-[#EDE8DF]/40">{mentor.company}</p>
                   </div>
                   
                   <div className="flex flex-col items-end gap-2">
-                    <div className="px-3 py-1.5 bg-[#3B82F6] rounded-lg flex items-center gap-1.5">
+                    <div className="px-3 py-1.5 bg-[#6B9080] rounded-lg flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5" />
                       <span className="text-xs font-semibold">Book</span>
                     </div>
-                    <span className="text-[10px] text-white/40">{mentor.tier} tier</span>
+                    <span className="text-[10px] text-[#EDE8DF]/40">{mentor.tier} tier</span>
                   </div>
                 </div>
               </button>
@@ -127,14 +127,14 @@ export default function MentorUnlock() {
       {/* Locked Mentors */}
       {lockedMentors.length > 0 && (
         <div>
-          <h2 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-4">
+          <h2 className="text-xs font-semibold text-[#9a948a] uppercase tracking-wide mb-4">
             Unlock at Operator Tier
           </h2>
           <div className="space-y-3">
             {lockedMentors.map((mentor) => (
               <div
                 key={mentor.name}
-                className="w-full bg-[#1A1A25] border border-white/5 rounded-2xl p-4 opacity-60"
+                className="w-full bg-[#453D36] border border-white/5 rounded-lg p-4 opacity-60"
               >
                 <div className="flex items-center gap-4">
                   <div className="relative">
@@ -145,23 +145,23 @@ export default function MentorUnlock() {
                     />
                     <div className="absolute inset-0 bg-black/40 rounded-xl flex items-center justify-center">
                       <div className="w-7 h-7 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                        <Lock className="w-4 h-4 text-white" />
+                        <Lock className="w-4 h-4 text-[#EDE8DF]" />
                       </div>
                     </div>
                   </div>
                   
                   <div className="flex-1">
                     <h3 className="font-semibold mb-1">{mentor.name}</h3>
-                    <p className="text-sm text-white/50 mb-2">{mentor.title}</p>
-                    <p className="text-xs text-white/40">{mentor.company}</p>
+                    <p className="text-sm text-[#9a948a] mb-2">{mentor.title}</p>
+                    <p className="text-xs text-[#EDE8DF]/40">{mentor.company}</p>
                   </div>
                   
                   <div className="flex flex-col items-end gap-2">
                     <div className="px-3 py-1.5 bg-white/5 rounded-lg flex items-center gap-1.5">
-                      <Lock className="w-3.5 h-3.5 text-white/30" />
-                      <span className="text-xs font-semibold text-white/40">Locked</span>
+                      <Lock className="w-3.5 h-3.5 text-[#EDE8DF]/30" />
+                      <span className="text-xs font-semibold text-[#EDE8DF]/40">Locked</span>
                     </div>
-                    <span className="text-[10px] text-white/40">{mentor.tier} tier</span>
+                    <span className="text-[10px] text-[#EDE8DF]/40">{mentor.tier} tier</span>
                   </div>
                 </div>
               </div>
