@@ -42,11 +42,11 @@ export default function Profile() {
         <div className="bg-gradient-to-br from-[#161922] to-[#12151D] border border-white/10 rounded-lg p-6">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-20 h-20 rounded-lg bg-gradient-to-br from-[#6B9080] to-[#5C7568] flex items-center justify-center text-2xl font-bold">
-              SC
+              RM
             </div>
             <div className="flex-1">
-              <h2 className="text-xl font-bold mb-1">Steve Chen</h2>
-              <p className="text-sm text-white/50 mb-2">steve@startup.com</p>
+              <h2 className="text-xl font-bold mb-1">Román Moskalenko</h2>
+              <p className="text-sm text-white/50 mb-2">roman@startup.com</p>
               <div className="flex items-center gap-2">
                 <span className="text-xs px-2 py-1 bg-white/10 border border-white/20 rounded-md">
                   SaaS

@@ -6,7 +6,7 @@ import { useCheckInApp } from "../checkIn/CheckInContext";
 import { getMoodContext } from "../checkIn/getMoodContext";
 import PostCheckInHome from "./PostCheckInHome";
 
-const FIRST_NAME = "Steve";
+const FIRST_NAME = "Román";
 
 export default function Dashboard() {
   const navigate = useNavigate();
