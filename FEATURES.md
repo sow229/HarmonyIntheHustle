@@ -1,7 +1,7 @@
-# FounderFlow - New Features Documentation
+# Equil - New Features Documentation
 
 ## Overview
-FounderFlow now includes three major new features: Mentor Match, Enhanced Anonymous Forum (Yik Yak-style), and Gamification System.
+Equil now includes three major new features: Mentor Match, Enhanced Anonymous Forum (Yik Yak-style), and Gamification System.
 
 ---
 

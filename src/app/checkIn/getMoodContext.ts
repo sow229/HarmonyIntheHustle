@@ -2,36 +2,35 @@ import type { CheckInResponse, MoodContext, SurfacesFeature } from "./types";
 
 /** Deterministic “anonymous” cohort size from response shape */
 function similarFoundersCount(response: CheckInResponse): number {
-  const { mood, energy, stress, focus } = response;
+  const { mood, happiness, stress } = response;
   const bucket =
     mood.charCodeAt(0) * 7 +
     Math.floor(stress / 12) * 11 +
-    Math.floor(energy / 15) * 5 +
-    Math.floor(focus / 10) * 3;
+    Math.floor(happiness / 15) * 5;
   return 21 + (Math.abs(bucket) % 47);
 }
 
 function pickFeature(response: CheckInResponse): SurfacesFeature {
-  const { mood, energy, stress, focus, progress } = response;
+  const { mood, happiness, stress } = response;
 
   const heavyStress = stress >= 62;
-  const frustration = stress >= 70 || progress < 38;
+  const frustration = stress >= 70 || happiness < 38;
   const isolation = mood === "struggling" && stress >= 48;
-  const momentum = mood === "great" && energy >= 58 && stress < 48;
-  const ridingHigh = mood === "great" && energy >= 52 && stress < 55 && focus >= 50;
+  const momentum = mood === "great" && happiness >= 58 && stress < 48;
+  const ridingHigh = mood === "great" && happiness >= 52 && stress < 55;
   const uncertain =
-    focus <= 44 ||
-    (mood === "okay" && focus <= 52) ||
-    (mood === "great" && stress >= 52 && focus < 50);
+    happiness <= 44 ||
+    (mood === "okay" && happiness <= 52) ||
+    (mood === "great" && stress >= 52 && happiness < 58);
   const seekingGuidance =
     (mood === "struggling" && stress < 55) ||
-    (mood === "okay" && stress >= 38 && stress < 64 && focus <= 56);
+    (mood === "okay" && stress >= 38 && stress < 64 && happiness <= 56);
 
   if (heavyStress || frustration || isolation) return "forum";
-  if (momentum || ridingHigh) return "gamification";
+  if (momentum || ridingHigh) return "events";
   if (uncertain || seekingGuidance) return "mentorship";
   if (mood === "struggling") return "forum";
-  if (mood === "great") return "gamification";
+  if (mood === "great") return "events";
   return "mentorship";
 }
 
@@ -39,7 +38,7 @@ function copyFor(
   response: CheckInResponse,
   feature: SurfacesFeature,
 ): Pick<MoodContext, "personalizedMessage" | "vibeLabel"> {
-  const { mood, energy, stress, focus, progress } = response;
+  const { mood, happiness, stress } = response;
 
   if (stress >= 68) {
     return {
@@ -71,7 +70,7 @@ function copyFor(
       vibeLabel: "Today's vibe: steady, getting through",
     };
   }
-  if (mood === "great" && energy >= 65 && stress < 45) {
+  if (mood === "great" && happiness >= 65 && stress < 45) {
     return {
       personalizedMessage: "That momentum you're carrying? Worth protecting. Keep riding it.",
       vibeLabel: "Today's vibe: sharp, energized, building",
@@ -83,22 +82,16 @@ function copyFor(
       vibeLabel: "Today's vibe: confident, forward motion",
     };
   }
-  if (focus < 45 && progress >= 50) {
-    return {
-      personalizedMessage: "Foggy focus with real progress underneath—classic founder brain. Breathe, then choose one thread.",
-      vibeLabel: "Today's vibe: scattered but shipping",
-    };
-  }
   if (feature === "mentorship") {
     return {
       personalizedMessage: "Big decisions love good questions. You don't have to white-knuckle this solo.",
       vibeLabel: "Today's vibe: curious, looking for signal",
     };
   }
-  if (feature === "gamification") {
+  if (feature === "events") {
     return {
-      personalizedMessage: "You're in a good pocket—let's turn it into a streak you can see.",
-      vibeLabel: "Today's vibe: dialed in, ready for a challenge",
+      personalizedMessage: "You're in a good pocket—perfect energy to show up IRL with other founders.",
+      vibeLabel: "Today's vibe: dialed in, ready to connect",
     };
   }
   return {

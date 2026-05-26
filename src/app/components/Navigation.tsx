@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router";
-import { Home, Radio, Trophy, User, GraduationCap } from "lucide-react";
+import { Home, Radio, CalendarDays, User, GraduationCap } from "lucide-react";
 import { motion } from "motion/react";
 
 const SAGE = "#6B9080";
@@ -19,7 +19,7 @@ export default function Navigation() {
     { path: "/", icon: Home, label: "Home", color: SAGE },
     { path: "/signal", icon: Radio, label: "Signal", color: SAGE_MUTED },
     { path: "/match", icon: GraduationCap, label: "Match", color: SAGE_DEEP },
-    { path: "/gamification", icon: Trophy, label: "Level", color: WARM_GOLD },
+    { path: "/events", icon: CalendarDays, label: "Events", color: WARM_GOLD },
     { path: "/profile", icon: User, label: "Profile", color: SAGE },
   ];
 

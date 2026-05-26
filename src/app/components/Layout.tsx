@@ -1,10 +1,23 @@
-import { Outlet, useLocation } from "react-router";
+import { Navigate, Outlet, useLocation } from "react-router";
 import Navigation from "./Navigation";
 import { motion } from "motion/react";
+import { useUserProfile } from "../user/UserProfileContext";
 
 export default function Layout() {
   const location = useLocation();
-  const hideNav = location.pathname === "/check-in";
+  const { hasDisplayName } = useUserProfile();
+  const isWelcome = location.pathname === "/welcome";
+  const hideNav =
+    isWelcome ||
+    location.pathname === "/check-in" ||
+    location.pathname.endsWith("/check-in");
+
+  let content = <Outlet />;
+  if (!hasDisplayName && !isWelcome) {
+    content = <Navigate to="/welcome" replace />;
+  } else if (hasDisplayName && isWelcome) {
+    content = <Navigate to="/" replace />;
+  }
 
   return (
     <motion.div
@@ -32,7 +45,7 @@ export default function Layout() {
         />
 
         <div className="flex-1 overflow-y-auto min-h-0 flex flex-col bg-[#0F1117]">
-          <Outlet />
+          {content}
         </div>
 
         {!hideNav && <Navigation />}

@@ -3,9 +3,10 @@ import Layout from "./components/Layout";
 import Dashboard from "./components/Dashboard";
 import FounderSignalEnhanced from "./components/FounderSignalEnhanced";
 import UnifiedMentorMatch from "./components/UnifiedMentorMatch";
-import Gamification from "./components/Gamification";
+import Events from "./components/Events";
 import Profile from "./components/Profile";
 import DailyCheckin from "./components/DailyCheckin";
+import Welcome from "./components/Welcome";
 
 export const router = createBrowserRouter([
   {
@@ -13,10 +14,11 @@ export const router = createBrowserRouter([
     Component: Layout,
     children: [
       { index: true, Component: Dashboard },
+      { path: "welcome", Component: Welcome },
       { path: "check-in", Component: DailyCheckin },
       { path: "signal", Component: FounderSignalEnhanced },
       { path: "match", Component: UnifiedMentorMatch },
-      { path: "gamification", Component: Gamification },
+      { path: "events", Component: Events },
       { path: "profile", Component: Profile },
     ],
   },

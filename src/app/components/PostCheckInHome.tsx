@@ -1,11 +1,14 @@
 import { motion } from "motion/react";
-import { ArrowRight, Flame, GraduationCap, Radio, Trophy } from "lucide-react";
-import type { MoodContext, SurfacesFeature } from "../checkIn/types";
+import { ArrowRight, CalendarDays, GraduationCap, Radio } from "lucide-react";
+import type { CheckInResponse, MoodContext, SurfacesFeature } from "../checkIn/types";
+import BillStreakHeader from "./BillStreakHeader";
 
 type PostCheckInHomeProps = {
   firstName: string;
   moodContext: MoodContext;
+  latestCheckIn: CheckInResponse;
   checkInStreak: number;
+  streakBroken: boolean;
   onPrimaryCta: () => void;
 };
 
@@ -34,12 +37,12 @@ function featureMeta(feature: SurfacesFeature): {
         icon: GraduationCap,
         accent: "from-[#6B9080]/25 to-[#4F6D5F]/15 border-[#6B9080]/30",
       };
-    case "gamification":
+    case "events":
       return {
-        title: "Daily challenge",
-        description: "Turn today's energy into points, streaks, and FounderBucks you can see.",
-        cta: "See today's challenge",
-        icon: Trophy,
+        title: "Founder events near you",
+        description: "Runs, workshops, and AI nights—show up and meet builders in person.",
+        cta: "Browse events",
+        icon: CalendarDays,
         accent: "from-[#C4A882]/20 to-[#6B9080]/10 border-[#C4A882]/30",
       };
   }
@@ -48,7 +51,9 @@ function featureMeta(feature: SurfacesFeature): {
 export default function PostCheckInHome({
   firstName,
   moodContext,
+  latestCheckIn,
   checkInStreak,
+  streakBroken,
   onPrimaryCta,
 }: PostCheckInHomeProps) {
   const { personalizedMessage, vibeLabel, feature, similarFoundersCount } = moodContext;
@@ -62,17 +67,13 @@ export default function PostCheckInHome({
         <p className="font-heading text-3xl gradient-heading">{firstName}</p>
       </div>
 
-      <p className="text-lg text-[#EDE8DF] leading-snug font-sans">{personalizedMessage}</p>
+      <BillStreakHeader
+        checkIn={latestCheckIn}
+        checkInStreak={checkInStreak}
+        streakBroken={streakBroken}
+      />
 
-      <div className="flex flex-wrap gap-2 items-center text-sm">
-        <span className="inline-flex items-center gap-1.5 rounded-md bg-[#161922] text-[#EDE8DF] px-3 py-1.5 border border-[rgba(237,232,223,0.1)]">
-          <Flame className="w-4 h-4 text-[#C4A882] shrink-0" aria-hidden />
-          <span className="font-sans">
-            <span className="font-semibold">{checkInStreak}</span>
-            <span className="text-[#9a948a]"> day streak</span>
-          </span>
-        </span>
-      </div>
+      <p className="text-lg text-[#EDE8DF] leading-snug font-sans">{personalizedMessage}</p>
 
       <p className="text-[#9a948a] text-sm leading-relaxed border-l-2 border-[#6B9080]/40 pl-3 font-sans">
         {vibeLabel}

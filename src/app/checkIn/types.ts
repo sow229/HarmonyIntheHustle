@@ -2,14 +2,13 @@ export type CheckInMood = "great" | "okay" | "struggling";
 
 /** Payload from the daily check-in form */
 export type CheckInResponse = {
-  mood: CheckInMood;
-  energy: number;
+  happiness: number;
   stress: number;
-  focus: number;
-  progress: number;
+  mood: CheckInMood;
+  note?: string;
 };
 
-export type SurfacesFeature = "forum" | "mentorship" | "gamification";
+export type SurfacesFeature = "forum" | "mentorship" | "events";
 
 export type MoodContext = {
   personalizedMessage: string;

@@ -1,27 +1,35 @@
-import { useState } from "react";
-import { Trophy, Activity, Radio, Users, Calendar, TrendingUp, Award, Settings, X, Sun, Moon, CheckCircle2, Link2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Activity, Radio, Users, Calendar, Settings, X, CheckCircle2, Link2 } from "lucide-react";
 import { Switch } from "./ui/switch";
-import { useTheme } from "next-themes";
 import { motion } from "motion/react";
+import { useCheckInApp } from "../checkIn/CheckInContext";
+import { useUserProfile } from "../user/UserProfileContext";
 
 export default function Profile() {
   const [showSettings, setShowSettings] = useState(false);
-  const [gamificationEnabled, setGamificationEnabled] = useState(true);
+  const [nameDraft, setNameDraft] = useState("");
   const [googleCalendarConnected, setGoogleCalendarConnected] = useState(true);
   const [linkedInConnected, setLinkedInConnected] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { checkInStreak } = useCheckInApp();
+  const { displayName, initials, setDisplayName } = useUserProfile();
+
+  useEffect(() => {
+    if (showSettings) {
+      setNameDraft(displayName);
+    }
+  }, [showSettings, displayName]);
   const activityHistory = [
-    { date: "Feb 19", type: "Signal Post", description: "Shared thoughts on hiring challenges" },
-    { date: "Feb 18", type: "Founder Match", description: "Connected with Alex Chen" },
-    { date: "Feb 17", type: "Insight", description: "Completed sleep analysis" },
-    { date: "Feb 16", type: "Signal Post", description: "Discussed burnout prevention" },
+    { date: "Feb 19", type: "Forum Post", description: "Shared thoughts on hiring challenges" },
+    { date: "Feb 18", type: "Mentor Match", description: "Matched with Alex Chen" },
+    { date: "Feb 17", type: "Resource", description: "Read sleep and recovery guide" },
+    { date: "Feb 16", type: "Forum Post", description: "Discussed burnout prevention" },
   ];
 
   const stats = [
-    { label: "Signal Posts", value: "24", icon: Radio },
-    { label: "Connections", value: "12", icon: Users },
-    { label: "Insights Viewed", value: "89", icon: Activity },
-    { label: "Days Active", value: "37", icon: Calendar },
+    { label: "Forum Posts", value: "24", icon: Radio },
+    { label: "Mentor Matches", value: "12", icon: Users },
+    { label: "Resources Viewed", value: "89", icon: Activity },
+    { label: "Day Streak", value: String(checkInStreak), icon: Calendar },
   ];
 
   return (
@@ -41,11 +49,11 @@ export default function Profile() {
         {/* User Card */}
         <div className="bg-gradient-to-br from-[#161922] to-[#12151D] border border-white/10 rounded-lg p-6">
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-20 h-20 rounded-lg bg-gradient-to-br from-[#6B9080] to-[#5C7568] flex items-center justify-center text-2xl font-bold">
-              SC
+            <div className="w-20 h-20 rounded-lg bg-gradient-to-br from-[#6B9080] to-[#5C7568] flex items-center justify-center text-2xl font-bold text-[#0F1117]">
+              {initials}
             </div>
             <div className="flex-1">
-              <h2 className="text-xl font-bold mb-1">Steve Chen</h2>
+              <h2 className="text-xl font-bold mb-1">{displayName}</h2>
               <p className="text-sm text-white/50 mb-2">steve@startup.com</p>
               <div className="flex items-center gap-2">
                 <span className="text-xs px-2 py-1 bg-white/10 border border-white/20 rounded-md">
@@ -55,32 +63,6 @@ export default function Profile() {
                   Pre-seed
                 </span>
               </div>
-            </div>
-          </div>
-
-          {/* Founder Score */}
-          <div className="bg-[#141419] border border-white/10 rounded-xl p-4">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6B9080] to-[#5C7568] flex items-center justify-center">
-                  <Trophy className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-white/50">Founder Score</p>
-                  <p className="font-bold text-2xl bg-gradient-to-r from-[#6B9080] to-[#5C7568] bg-clip-text text-transparent">
-                    87
-                  </p>
-                </div>
-              </div>
-              <div className="text-right">
-                <div className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg mb-1">
-                  <span className="text-xs font-semibold text-emerald-400">Performing</span>
-                </div>
-                <p className="text-xs text-white/50">+3 this week</p>
-              </div>
-            </div>
-            <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full w-[87%] bg-gradient-to-r from-[#6B9080] to-[#5C7568] rounded-full" />
             </div>
           </div>
         </div>
@@ -105,46 +87,6 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* Progress Indicators */}
-      <div className="bg-[#161922] border border-white/10 rounded-lg p-5 mb-6">
-        <h3 className="font-semibold mb-4 flex items-center gap-2">
-          <TrendingUp className="w-5 h-5 text-[#6B9080]" />
-          This Week's Progress
-        </h3>
-        
-        <div className="space-y-4">
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-white/70">Focus Score</span>
-              <span className="text-sm font-semibold">92/100</span>
-            </div>
-            <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full w-[92%] bg-gradient-to-r from-[#6B9080] to-[#4F6D5F] rounded-full" />
-            </div>
-          </div>
-
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-white/70">Recovery Score</span>
-              <span className="text-sm font-semibold">84/100</span>
-            </div>
-            <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full w-[84%] bg-gradient-to-r from-emerald-500 to-green-500 rounded-full" />
-            </div>
-          </div>
-
-          <div>
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-white/70">Consistency</span>
-              <span className="text-sm font-semibold">89%</span>
-            </div>
-            <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full w-[89%] bg-gradient-to-r from-[#5C7568] to-[#4A5E52] rounded-full" />
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Activity History */}
       <div className="mb-6">
         <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-4">
@@ -157,9 +99,9 @@ export default function Profile() {
               className="bg-[#161922] border border-white/10 rounded-xl p-4 flex items-start gap-3"
             >
               <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0 mt-0.5">
-                {activity.type === "Signal Post" && <Radio className="w-4 h-4 text-[#6B9080]" />}
-                {activity.type === "Founder Match" && <Users className="w-4 h-4 text-[#5C7568]" />}
-                {activity.type === "Insight" && <Activity className="w-4 h-4 text-emerald-500" />}
+                {activity.type === "Forum Post" && <Radio className="w-4 h-4 text-[#6B9080]" />}
+                {activity.type === "Mentor Match" && <Users className="w-4 h-4 text-[#5C7568]" />}
+                {activity.type === "Resource" && <Activity className="w-4 h-4 text-[#8A9B8F]" />}
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-1">
@@ -170,44 +112,6 @@ export default function Profile() {
               </div>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* Achievements */}
-      <div className="bg-gradient-to-br from-[#161922] to-[#12151D] border border-white/10 rounded-lg p-5">
-        <div className="flex items-center gap-2 mb-4">
-          <Award className="w-5 h-5 text-[#5C7568]" />
-          <h3 className="font-semibold">Achievements</h3>
-        </div>
-        
-        <div className="grid grid-cols-4 gap-3">
-          <div className="flex flex-col items-center">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#6B9080] to-[#4F6D5F] flex items-center justify-center mb-2">
-              <Radio className="w-6 h-6" />
-            </div>
-            <span className="text-[10px] text-white/60 text-center">Active Sharer</span>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5C7568] to-[#4A5E52] flex items-center justify-center mb-2">
-              <Users className="w-6 h-6" />
-            </div>
-            <span className="text-[10px] text-white/60 text-center">Connector</span>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center mb-2">
-              <TrendingUp className="w-6 h-6" />
-            </div>
-            <span className="text-[10px] text-white/60 text-center">Consistent</span>
-          </div>
-
-          <div className="flex flex-col items-center opacity-40">
-            <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-2">
-              <Trophy className="w-6 h-6 text-white/30" />
-            </div>
-            <span className="text-[10px] text-white/40 text-center">Top 10%</span>
-          </div>
         </div>
       </div>
 
@@ -228,11 +132,22 @@ export default function Profile() {
 
             {/* Settings Content */}
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
-              {/* Gamification Settings */}
               <div>
-                <h4 className="text-sm font-semibold text-white/70 dark:text-white/70 text-gray-700 mb-4">Gamification</h4>
-                <div className="space-y-4">
-                </div>
+                <h4 className="text-sm font-semibold text-white/70 mb-4">Your name</h4>
+                <label htmlFor="settings-display-name" className="sr-only">
+                  Display name
+                </label>
+                <input
+                  id="settings-display-name"
+                  type="text"
+                  value={nameDraft}
+                  onChange={(e) => setNameDraft(e.target.value)}
+                  placeholder="What should we call you?"
+                  className="w-full rounded-lg bg-[#161922] border border-white/10 px-4 py-3 text-[#EDE8DF] placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[#6B9080]/45 font-sans"
+                />
+                <p className="text-xs text-white/40 mt-2 font-sans">
+                  Used on your home screen and across the app.
+                </p>
               </div>
 
               {/* Integrations */}
@@ -343,8 +258,15 @@ export default function Profile() {
             {/* Footer */}
             <div className="p-6 border-t border-white/10 bg-[#161922]">
               <button
-                onClick={() => setShowSettings(false)}
-                className="w-full py-3 bg-[#6B9080] hover:bg-[#4F6D5F] rounded-xl font-semibold transition-colors"
+                type="button"
+                onClick={() => {
+                  if (nameDraft.trim()) {
+                    setDisplayName(nameDraft);
+                    setShowSettings(false);
+                  }
+                }}
+                disabled={!nameDraft.trim()}
+                className="w-full py-3 bg-[#6B9080] hover:bg-[#4F6D5F] disabled:opacity-50 rounded-xl font-semibold transition-colors"
               >
                 Save Changes
               </button>
