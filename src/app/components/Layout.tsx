@@ -10,6 +10,7 @@ export default function Layout() {
   const hideNav =
     isWelcome ||
     location.pathname === "/check-in" ||
+    location.pathname === "/activity-log" ||
     location.pathname.endsWith("/check-in");
 
   let content = <Outlet />;

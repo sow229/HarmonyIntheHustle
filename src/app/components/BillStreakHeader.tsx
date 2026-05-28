@@ -8,12 +8,16 @@ type BillStreakHeaderProps = {
   checkIn: CheckInResponse;
   checkInStreak: number;
   streakBroken: boolean;
+  celebrating?: boolean;
+  encouraging?: boolean;
 };
 
 export default function BillStreakHeader({
   checkIn,
   checkInStreak,
   streakBroken,
+  celebrating = false,
+  encouraging = false,
 }: BillStreakHeaderProps) {
   const message = getBillStreakMessage(checkInStreak, streakBroken);
 
@@ -38,8 +42,9 @@ export default function BillStreakHeader({
         )}
 
         <BillMascot
-          happiness={checkIn.happiness}
-          stress={checkIn.stress}
+          happiness={encouraging ? Math.min(100, checkIn.happiness + 10) : checkIn.happiness}
+          stress={encouraging ? Math.max(0, checkIn.stress - 8) : checkIn.stress}
+          celebrating={celebrating}
           compact
           showName={false}
           className="!mx-0"

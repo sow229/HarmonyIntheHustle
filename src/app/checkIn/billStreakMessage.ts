@@ -3,7 +3,7 @@ export function getBillStreakMessage(
   streak: number,
   streakBroken: boolean,
 ): string | null {
-  if (streakBroken) return "Let's get back on track.";
+  if (streakBroken) return "Glad you're here today.";
   if (streak >= 30) return "One month strong.";
   if (streak === 7) return "We're on a roll 🦔";
   return null;

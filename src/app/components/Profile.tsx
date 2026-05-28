@@ -1,16 +1,31 @@
 import { useEffect, useState } from "react";
-import { Activity, Radio, Users, Calendar, Settings, X, CheckCircle2, Link2 } from "lucide-react";
+import { Calendar, Settings, X, CheckCircle2, Link2 } from "lucide-react";
 import { Switch } from "./ui/switch";
 import { motion } from "motion/react";
 import { useCheckInApp } from "../checkIn/CheckInContext";
 import { useUserProfile } from "../user/UserProfileContext";
+import { getActivityMeta } from "../checkIn/activityMeta";
+import type { CheckInResponse } from "../checkIn/types";
+
+function moodDot(checkIn?: CheckInResponse) {
+  if (!checkIn) return "bg-[#7e7a73]";
+  if (checkIn.stress >= 70) return "bg-[#C96B6B]";
+  if (checkIn.happiness >= 65 && checkIn.stress < 50) return "bg-[#6B9080]";
+  return "bg-[#C4A882]";
+}
+
+function formatDayLabel(day: string) {
+  const date = new Date(`${day}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return day;
+  return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
 
 export default function Profile() {
   const [showSettings, setShowSettings] = useState(false);
   const [nameDraft, setNameDraft] = useState("");
   const [googleCalendarConnected, setGoogleCalendarConnected] = useState(true);
   const [linkedInConnected, setLinkedInConnected] = useState(false);
-  const { checkInStreak } = useCheckInApp();
+  const { checkInStreak, totalDaysLogged, activityLogs, checkInsByDay } = useCheckInApp();
   const { displayName, initials, setDisplayName } = useUserProfile();
 
   useEffect(() => {
@@ -18,19 +33,12 @@ export default function Profile() {
       setNameDraft(displayName);
     }
   }, [showSettings, displayName]);
-  const activityHistory = [
-    { date: "Feb 19", type: "Forum Post", description: "Shared thoughts on hiring challenges" },
-    { date: "Feb 18", type: "Mentor Match", description: "Matched with Alex Chen" },
-    { date: "Feb 17", type: "Resource", description: "Read sleep and recovery guide" },
-    { date: "Feb 16", type: "Forum Post", description: "Discussed burnout prevention" },
-  ];
-
-  const stats = [
-    { label: "Forum Posts", value: "24", icon: Radio },
-    { label: "Mentor Matches", value: "12", icon: Users },
-    { label: "Resources Viewed", value: "89", icon: Activity },
-    { label: "Day Streak", value: String(checkInStreak), icon: Calendar },
-  ];
+  const activityRows = Object.entries(
+    activityLogs.reduce<Record<string, typeof activityLogs>>((acc, log) => {
+      acc[log.day] = acc[log.day] ? [...acc[log.day], log] : [log];
+      return acc;
+    }, {}),
+  ).sort(([a], [b]) => (a > b ? -1 : 1));
 
   return (
     <div className="min-h-full bg-gradient-to-b from-[#0F1117] via-[#0F1117] to-[#12151D] dark:bg-gradient-to-b dark:from-[#0F1117] dark:via-[#0F1117] dark:to-[#12151D] bg-white text-gray-900 dark:text-white px-6 pt-14 pb-6">
@@ -68,51 +76,64 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* Stats Grid */}
+      {/* Stats */}
       <div className="mb-6">
-        <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-4">
-          Activity Stats
-        </h3>
         <div className="grid grid-cols-2 gap-3">
-          {stats.map((stat) => {
-            const Icon = stat.icon;
-            return (
-              <div key={stat.label} className="bg-[#161922] border border-white/10 rounded-xl p-4">
-                <Icon className="w-5 h-5 text-white/40 mb-3" />
-                <p className="text-2xl font-bold mb-1">{stat.value}</p>
-                <p className="text-xs text-white/50">{stat.label}</p>
-              </div>
-            );
-          })}
+          <div className="bg-[#161922] border border-white/10 rounded-xl p-4">
+            <p className="text-xs text-white/50 mb-2">🦔 Current Streak</p>
+            <p className="text-2xl font-bold text-[#EDE8DF]">{checkInStreak}</p>
+          </div>
+          <div className="bg-[#161922] border border-white/10 rounded-xl p-4">
+            <p className="text-xs text-white/50 mb-2">📅 Total Days Logged</p>
+            <p className="text-2xl font-bold text-[#EDE8DF]">{totalDaysLogged}</p>
+          </div>
         </div>
       </div>
 
-      {/* Activity History */}
+      {/* Activity Timeline */}
       <div className="mb-6">
         <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-4">
-          Recent Activity
+          Activity Timeline
         </h3>
-        <div className="space-y-2">
-          {activityHistory.map((activity, index) => (
-            <div
-              key={index}
-              className="bg-[#161922] border border-white/10 rounded-xl p-4 flex items-start gap-3"
-            >
-              <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0 mt-0.5">
-                {activity.type === "Forum Post" && <Radio className="w-4 h-4 text-[#6B9080]" />}
-                {activity.type === "Mentor Match" && <Users className="w-4 h-4 text-[#5C7568]" />}
-                {activity.type === "Resource" && <Activity className="w-4 h-4 text-[#8A9B8F]" />}
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between mb-1">
-                  <p className="text-sm font-medium">{activity.type}</p>
-                  <span className="text-xs text-white/40">{activity.date}</span>
+        {activityRows.length === 0 ? (
+          <div className="bg-[#161922] border border-white/10 rounded-xl p-4">
+            <p className="text-sm text-[#9a948a]">No activities logged yet.</p>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {activityRows.map(([day, logs]) => (
+              <div
+                key={day}
+                className="bg-[#161922] border border-white/10 rounded-xl p-4"
+              >
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <p className="text-sm font-medium text-[#EDE8DF]">{formatDayLabel(day)}</p>
+                  <span
+                    className={`w-2.5 h-2.5 rounded-full ${moodDot(checkInsByDay[day])}`}
+                    aria-label="Mood indicator"
+                  />
                 </div>
-                <p className="text-xs text-white/60">{activity.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {logs
+                    .sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1))
+                    .map((log) => {
+                      const meta = getActivityMeta(log.category);
+                      const title = log.note ? `${meta.label}: ${log.note}` : meta.label;
+                      return (
+                        <span
+                          key={log.id}
+                          title={title}
+                          className="text-xs rounded-full px-2.5 py-1 bg-[#0F1117] border border-white/10 text-[#cfd8d2]"
+                        >
+                          {meta.emoji} {meta.label}
+                        </span>
+                      );
+                    })}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Settings Modal */}

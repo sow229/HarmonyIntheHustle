@@ -1,116 +1,123 @@
 import { motion } from "motion/react";
-import { ArrowRight, CalendarDays, GraduationCap, Radio } from "lucide-react";
+import { CalendarDays, GraduationCap, Radio } from "lucide-react";
 import type { CheckInResponse, MoodContext, SurfacesFeature } from "../checkIn/types";
-import BillStreakHeader from "./BillStreakHeader";
+import BillMascot from "./BillMascot";
 
 type PostCheckInHomeProps = {
   firstName: string;
   moodContext: MoodContext;
   latestCheckIn: CheckInResponse;
   checkInStreak: number;
-  streakBroken: boolean;
-  onPrimaryCta: () => void;
+  hasLoggedActivityToday: boolean;
+  streakWeek: Array<{ label: string; completed: boolean; day: string }>;
+  onLogActivity: () => void;
+  onOpenFeature: (feature: SurfacesFeature) => void;
 };
-
-function featureMeta(feature: SurfacesFeature): {
-  title: string;
-  description: string;
-  cta: string;
-  icon: typeof Radio;
-  accent: string;
-} {
-  switch (feature) {
-    case "forum":
-      return {
-        title: "Anonymous founder forum",
-        description:
-          "Share what's on your mind without your name attached—founders who get it are listening.",
-        cta: "Open Signal",
-        icon: Radio,
-        accent: "from-[#6B9080]/20 to-[#5C7568]/10 border-[#6B9080]/25",
-      };
-    case "mentorship":
-      return {
-        title: "Mentor match",
-        description: "Get a second brain from someone who's been through the maze before you.",
-        cta: "Browse mentor matches",
-        icon: GraduationCap,
-        accent: "from-[#6B9080]/25 to-[#4F6D5F]/15 border-[#6B9080]/30",
-      };
-    case "events":
-      return {
-        title: "Founder events near you",
-        description: "Runs, workshops, and AI nights—show up and meet builders in person.",
-        cta: "Browse events",
-        icon: CalendarDays,
-        accent: "from-[#C4A882]/20 to-[#6B9080]/10 border-[#C4A882]/30",
-      };
-  }
-}
 
 export default function PostCheckInHome({
   firstName,
   moodContext,
   latestCheckIn,
   checkInStreak,
-  streakBroken,
-  onPrimaryCta,
+  hasLoggedActivityToday,
+  streakWeek,
+  onLogActivity,
+  onOpenFeature,
 }: PostCheckInHomeProps) {
-  const { personalizedMessage, vibeLabel, feature, similarFoundersCount } = moodContext;
-  const meta = featureMeta(feature);
-  const Icon = meta.icon;
+  const { feature } = moodContext;
+  const todayLabel = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+  const featureItems: Array<{ feature: SurfacesFeature; label: string; icon: typeof Radio }> = [
+    { feature: "forum", label: "Forum", icon: Radio },
+    { feature: "mentorship", label: "Mentors", icon: GraduationCap },
+    { feature: "events", label: "Events", icon: CalendarDays },
+  ];
 
   return (
     <div className="relative z-10 w-full max-w-md mx-auto flex flex-col flex-1 min-h-0 text-left pt-8 pb-10 gap-6">
       <div>
-        <p className="text-sm text-[#9a948a] mb-1 font-sans">Welcome back,</p>
-        <p className="font-heading text-3xl gradient-heading">{firstName}</p>
+        <p className="font-heading text-4xl text-[#EDE8DF] tracking-tight">Hey {firstName}</p>
+        <p className="text-sm text-[#7A9BB5] mt-1 font-sans">{todayLabel}</p>
       </div>
 
-      <BillStreakHeader
-        checkIn={latestCheckIn}
-        checkInStreak={checkInStreak}
-        streakBroken={streakBroken}
-      />
+      <div className="flex flex-col items-center text-center py-1">
+        <BillMascot
+          happiness={hasLoggedActivityToday ? Math.min(100, latestCheckIn.happiness + 12) : latestCheckIn.happiness}
+          stress={hasLoggedActivityToday ? Math.max(0, latestCheckIn.stress - 8) : latestCheckIn.stress}
+          celebrating={hasLoggedActivityToday}
+          showName={false}
+          className="scale-125"
+        />
 
-      <p className="text-lg text-[#EDE8DF] leading-snug font-sans">{personalizedMessage}</p>
+        {!hasLoggedActivityToday && (
+          <p className="text-sm text-[#7A9BB5] mt-4 font-sans">
+            Log an activity to lock in your streak
+          </p>
+        )}
 
-      <p className="text-[#9a948a] text-sm leading-relaxed border-l-2 border-[#6B9080]/40 pl-3 font-sans">
-        {vibeLabel}
-      </p>
-
-      <p className="text-xs text-[#9a948a]/80 font-sans">
-        {similarFoundersCount} other founders checked in feeling similarly today
-      </p>
-
-      <div className={`rounded-lg border p-5 bg-gradient-to-br ${meta.accent} shadow-lg shadow-black/20`}>
-        <div className="flex items-start gap-3">
-          <div className="w-11 h-11 rounded-md bg-[#232833] flex items-center justify-center shrink-0">
-            <Icon className="w-5 h-5 text-[#6B9080]" aria-hidden />
-          </div>
-          <div>
-            <h3 className="font-heading text-base text-[#EDE8DF] leading-tight">{meta.title}</h3>
-            <p className="text-sm text-[#9a948a] mt-1.5 leading-snug font-sans">{meta.description}</p>
-          </div>
+        <div className="flex items-center gap-3 mt-4">
+          {streakWeek.map((item) => (
+            <div key={item.day} className="flex flex-col items-center gap-2">
+              <div
+                className={`w-3.5 h-3.5 rounded-full border ${
+                  item.completed
+                    ? "bg-[#5BBFA0] border-[#5BBFA0]"
+                    : "bg-transparent border-[#7A9BB5]/45"
+                }`}
+                aria-label={`${item.label} ${item.completed ? "completed" : "missed"}`}
+              />
+              <span className="text-[10px] text-[#7A9BB5] font-sans">{item.label}</span>
+            </div>
+          ))}
         </div>
+
+        <p className="font-heading text-4xl text-[#5BBFA0] mt-5">
+          {checkInStreak} day streak
+        </p>
       </div>
 
       <motion.button
         type="button"
-        whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        onClick={onPrimaryCta}
-        className="w-full px-6 py-4 rounded-lg font-semibold text-lg bg-[#6B9080] hover:bg-[#5C7568] text-[#0F1117] shadow-lg shadow-black/25 flex items-center justify-center gap-2 font-sans transition-colors"
+        onClick={onLogActivity}
+        className={`w-full px-6 py-4 rounded-lg font-semibold text-lg border transition-colors font-sans ${
+          hasLoggedActivityToday
+            ? "bg-[#5BBFA0]/12 border-[#5BBFA0]/30 text-[#95cfc0]"
+            : "bg-[#5BBFA0] hover:bg-[#4fa88d] border-[#5BBFA0] text-[#0D1A2A]"
+        }`}
       >
-        {meta.cta}
-        <ArrowRight className="w-5 h-5" aria-hidden />
+        {hasLoggedActivityToday ? "Activity Logged" : "+ Log Activity"}
       </motion.button>
 
-      <motion.div className="flex-1 min-h-6" aria-hidden initial={false} />
+      <div className="h-px bg-[#7A9BB5]/25" />
 
-      <p className="text-center text-xs text-[#9a948a]/60 shrink-0 font-sans">
-        Your next daily check-in unlocks tomorrow.
-      </p>
+      <div className="grid grid-cols-3 gap-3">
+        {featureItems.map((item) => {
+          const Icon = item.icon;
+          const active = feature === item.feature;
+          return (
+            <motion.button
+              key={item.feature}
+              type="button"
+              whileTap={{ scale: 0.98 }}
+              onClick={() => onOpenFeature(item.feature)}
+              className={`rounded-lg border px-3 py-4 flex flex-col items-center gap-2 transition-colors ${
+                active
+                  ? "bg-[#5BBFA0]/12 border-[#5BBFA0]/35"
+                  : "bg-[#0f2236]/45 border-[#7A9BB5]/20 hover:bg-[#10263c]/55"
+              }`}
+            >
+              <Icon className={`w-5 h-5 ${active ? "text-[#5BBFA0]" : "text-[#7A9BB5]"}`} aria-hidden />
+              <span className={`text-xs font-sans ${active ? "text-[#d8f1e8]" : "text-[#7A9BB5]"}`}>
+                {item.label}
+              </span>
+            </motion.button>
+          );
+        })}
+      </div>
     </div>
   );
 }

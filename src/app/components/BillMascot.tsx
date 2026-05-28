@@ -3,6 +3,8 @@ import { motion } from "motion/react";
 type BillMascotProps = {
   happiness: number;
   stress: number;
+  /** Lower energy makes Bill look sleepier / droopier */
+  energy?: number;
   celebrating?: boolean;
   /** Smaller home-screen variant */
   compact?: boolean;
@@ -16,6 +18,7 @@ type BillMascotProps = {
 export default function BillMascot({
   happiness,
   stress,
+  energy = 60,
   celebrating = false,
   compact = false,
   showName = true,
@@ -23,12 +26,20 @@ export default function BillMascot({
 }: BillMascotProps) {
   const smile = (happiness - 50) / 50;
   const tension = (stress - 40) / 60;
+  const fatigue = (60 - energy) / 60;
   const browLift = Math.max(0, tension) * 6;
-  const eyeSquint = Math.min(0.35, Math.max(0, tension * 0.4 - smile * 0.1));
-  const mouthCurve = celebrating ? 14 : 4 + smile * 10 - tension * 8;
+  const eyeSquint = Math.min(
+    0.45,
+    Math.max(0, tension * 0.35 + Math.max(0, fatigue) * 0.4 - smile * 0.1),
+  );
+  const mouthCurve = celebrating
+    ? 14
+    : 4 + smile * 10 - tension * 8 - Math.max(0, fatigue) * 6;
   const cheekGlow = celebrating ? 0.45 : Math.max(0, smile * 0.35);
 
-  const quillTilt = celebrating ? -18 : smile * 8 - tension * 14;
+  const quillTilt = celebrating
+    ? -18
+    : smile * 8 - tension * 14 - Math.max(0, fatigue) * 6;
   const bodyBounce = celebrating ? [0, -10, -4, 0] : 0;
   const bodyRotate = celebrating ? [0, -4, 4, -2, 0] : 0;
 
@@ -153,20 +164,20 @@ export default function BillMascot({
         {/* Eyes */}
         <motion.ellipse
           cx="52"
-          cy="64"
+          cy={64 + Math.max(0, fatigue) * 3}
           rx="3.5"
           ry={3.5 - eyeSquint * 2}
           fill="#1a221e"
-          animate={{ ry: 3.5 - eyeSquint * 2 }}
+          animate={{ cy: 64 + Math.max(0, fatigue) * 3, ry: 3.5 - eyeSquint * 2 }}
           transition={{ duration: 0.25 }}
         />
         <motion.ellipse
           cx="68"
-          cy="64"
+          cy={64 + Math.max(0, fatigue) * 3}
           rx="3.5"
           ry={3.5 - eyeSquint * 2}
           fill="#1a221e"
-          animate={{ ry: 3.5 - eyeSquint * 2 }}
+          animate={{ cy: 64 + Math.max(0, fatigue) * 3, ry: 3.5 - eyeSquint * 2 }}
           transition={{ duration: 0.25 }}
         />
         {smile > 0.35 && !celebrating && (

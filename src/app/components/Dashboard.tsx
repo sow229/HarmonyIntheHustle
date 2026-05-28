@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router";
 import { motion } from "motion/react";
 import { useCheckInApp } from "../checkIn/CheckInContext";
 import { getMoodContext } from "../checkIn/getMoodContext";
+import type { SurfacesFeature } from "../checkIn/types";
 import { useUserProfile } from "../user/UserProfileContext";
 import PostCheckInHome from "./PostCheckInHome";
 
@@ -11,7 +12,14 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const location = useLocation();
   const { firstName } = useUserProfile();
-  const { checkInStreak, latestCheckIn, restoreTodayCheckIn, streakBrokenToday } =
+  const {
+    checkInStreak,
+    latestCheckIn,
+    restoreTodayCheckIn,
+    hasLoggedActivityToday,
+    checkInsByDay,
+    activityLogs,
+  } =
     useCheckInApp();
 
   const greeting = "Good Morning";
@@ -24,15 +32,26 @@ export default function Dashboard() {
 
   const postContext = latestCheckIn ? getMoodContext(latestCheckIn) : null;
 
-  const primaryPath =
-    postContext?.feature === "forum"
-      ? "/signal"
-      : postContext?.feature === "mentorship"
-        ? "/match"
-        : "/events";
+  const activityDays = new Set(activityLogs.map((log) => log.day));
+  const streakWeek = Array.from({ length: 7 }, (_, idx) => {
+    const date = new Date();
+    date.setDate(date.getDate() - (6 - idx));
+    const day = date.toLocaleDateString("en-CA");
+    return {
+      day,
+      label: date.toLocaleDateString("en-US", { weekday: "short" }).charAt(0),
+      completed: Boolean(checkInsByDay[day] && activityDays.has(day)),
+    };
+  });
+
+  const handleFeatureOpen = (feature: SurfacesFeature) => {
+    if (feature === "forum") navigate("/signal");
+    else if (feature === "mentorship") navigate("/match");
+    else navigate("/events");
+  };
 
   return (
-    <div className="min-h-full bg-gradient-to-b from-[#0F1117] via-[#0F1117] to-[#12151D] text-[#EDE8DF] px-6 flex flex-col relative overflow-hidden app-texture">
+    <div className="min-h-full bg-[#0D1A2A] text-[#EDE8DF] px-6 flex flex-col relative overflow-hidden app-texture">
       <motion.div
         className="absolute inset-0 overflow-hidden pointer-events-none"
         initial={false}
@@ -40,12 +59,12 @@ export default function Dashboard() {
         <motion.div
           animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.28, 0.15] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-20 -right-20 w-80 h-80 bg-[#6B9080]/12 rounded-full blur-3xl"
+          className="absolute -top-20 -right-20 w-80 h-80 bg-[#5BBFA0]/14 rounded-full blur-3xl"
         />
         <motion.div
           animate={{ scale: [1.2, 1, 1.2], opacity: [0.12, 0.22, 0.12] }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute -bottom-20 -left-20 w-72 h-72 bg-[#5C7568]/10 rounded-full blur-3xl"
+          className="absolute -bottom-20 -left-20 w-72 h-72 bg-[#5BBFA0]/10 rounded-full blur-3xl"
         />
       </motion.div>
 
@@ -56,8 +75,10 @@ export default function Dashboard() {
             moodContext={postContext}
             latestCheckIn={latestCheckIn}
             checkInStreak={checkInStreak}
-            streakBroken={streakBrokenToday}
-            onPrimaryCta={() => navigate(primaryPath)}
+            hasLoggedActivityToday={hasLoggedActivityToday}
+            streakWeek={streakWeek}
+            onLogActivity={() => navigate("/activity-log")}
+            onOpenFeature={handleFeatureOpen}
           />
         </div>
       ) : (

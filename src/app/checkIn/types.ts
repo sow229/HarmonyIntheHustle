@@ -8,6 +8,24 @@ export type CheckInResponse = {
   note?: string;
 };
 
+export type ActivityCategory =
+  | "workout"
+  | "run"
+  | "meditation"
+  | "deep-work"
+  | "coffee-chat"
+  | "reading"
+  | "rest"
+  | "other";
+
+export type ActivityLog = {
+  id: string;
+  category: ActivityCategory;
+  note?: string;
+  timestamp: string;
+  day: string;
+};
+
 export type SurfacesFeature = "forum" | "mentorship" | "events";
 
 export type MoodContext = {

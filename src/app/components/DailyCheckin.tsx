@@ -54,6 +54,7 @@ export default function DailyCheckin() {
   const { completeCheckIn } = useCheckInApp();
   const [happiness, setHappiness] = useState([55]);
   const [stress, setStress] = useState([40]);
+  const [energy, setEnergy] = useState([65]);
   const [note, setNote] = useState("");
   const [celebrating, setCelebrating] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -96,6 +97,7 @@ export default function DailyCheckin() {
             <BillMascot
               happiness={happiness[0]}
               stress={stress[0]}
+              energy={energy[0]}
               celebrating={celebrating}
             />
           </div>
@@ -119,6 +121,12 @@ export default function DailyCheckin() {
               value={stress}
               onChange={setStress}
               gradient="from-[#C4A882] to-[#9B8B7E]"
+            />
+            <CheckInSlider
+              label="Energy"
+              value={energy}
+              onChange={setEnergy}
+              gradient="from-[#4F6D5F] to-[#6B9080]"
             />
           </div>
 
