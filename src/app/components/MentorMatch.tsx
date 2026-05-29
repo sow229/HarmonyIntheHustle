@@ -283,7 +283,7 @@ export default function MentorMatch() {
       {/* My Connections */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-xs font-semibold text-[#9a948a] uppercase tracking-wide">
+          <h3 className="text-xs font-semibold text-[#9a948a] uppercase tracking-wide font-sans">
             My Mentor Connections
           </h3>
           <button className="text-xs font-semibold text-[#6B9080] hover:text-[#4F6D5F] flex items-center gap-1">

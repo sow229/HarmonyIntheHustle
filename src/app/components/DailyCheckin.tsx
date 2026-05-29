@@ -17,17 +17,19 @@ function CheckInSlider({
   label,
   value,
   onChange,
-  gradient,
+  color,
 }: {
   label: string;
   value: number[];
   onChange: (v: number[]) => void;
-  gradient: string;
+  color: string;
 }) {
   return (
     <div className="space-y-3">
       <div className="flex items-baseline justify-between gap-3">
-        <label className="text-sm font-medium text-[#EDE8DF] font-sans">{label}</label>
+        <label className="text-sm font-medium font-sans" style={{ color }}>
+          {label}
+        </label>
         <span className="text-sm text-[#9a948a] tabular-nums font-sans">{value[0]}</span>
       </div>
       <Slider.Root
@@ -38,7 +40,10 @@ function CheckInSlider({
         step={1}
       >
         <Slider.Track className="bg-[#232833] relative grow rounded-full h-1.5">
-          <Slider.Range className={`absolute bg-gradient-to-r ${gradient} h-full rounded-full`} />
+          <Slider.Range
+            className="absolute h-full rounded-full"
+            style={{ backgroundColor: color }}
+          />
         </Slider.Track>
         <Slider.Thumb
           className="block w-4 h-4 bg-[#EDE8DF] shadow-md rounded-full focus:outline-none focus:ring-2 focus:ring-[#6B9080]/50 cursor-grab active:cursor-grabbing"
@@ -114,19 +119,19 @@ export default function DailyCheckin() {
               label="Happiness"
               value={happiness}
               onChange={setHappiness}
-              gradient="from-[#6B9080] to-[#8A9B8F]"
+              color="#E8B931"
             />
             <CheckInSlider
               label="Stress Level"
               value={stress}
               onChange={setStress}
-              gradient="from-[#C4A882] to-[#9B8B7E]"
+              color="#D9534F"
             />
             <CheckInSlider
               label="Energy"
               value={energy}
               onChange={setEnergy}
-              gradient="from-[#4F6D5F] to-[#6B9080]"
+              color="#E08A3C"
             />
           </div>
 

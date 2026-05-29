@@ -1,11 +1,10 @@
 import { motion } from "motion/react";
 import { CalendarDays, GraduationCap, Radio } from "lucide-react";
-import type { CheckInResponse, MoodContext, SurfacesFeature } from "../checkIn/types";
+import type { CheckInResponse, SurfacesFeature } from "../checkIn/types";
 import BillMascot from "./BillMascot";
 
 type PostCheckInHomeProps = {
   firstName: string;
-  moodContext: MoodContext;
   latestCheckIn: CheckInResponse;
   checkInStreak: number;
   hasLoggedActivityToday: boolean;
@@ -16,7 +15,6 @@ type PostCheckInHomeProps = {
 
 export default function PostCheckInHome({
   firstName,
-  moodContext,
   latestCheckIn,
   checkInStreak,
   hasLoggedActivityToday,
@@ -24,7 +22,6 @@ export default function PostCheckInHome({
   onLogActivity,
   onOpenFeature,
 }: PostCheckInHomeProps) {
-  const { feature } = moodContext;
   const todayLabel = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",
@@ -97,23 +94,16 @@ export default function PostCheckInHome({
       <div className="grid grid-cols-3 gap-3">
         {featureItems.map((item) => {
           const Icon = item.icon;
-          const active = feature === item.feature;
           return (
             <motion.button
               key={item.feature}
               type="button"
               whileTap={{ scale: 0.98 }}
               onClick={() => onOpenFeature(item.feature)}
-              className={`rounded-lg border px-3 py-4 flex flex-col items-center gap-2 transition-colors ${
-                active
-                  ? "bg-[#5BBFA0]/12 border-[#5BBFA0]/35"
-                  : "bg-[#0f2236]/45 border-[#7A9BB5]/20 hover:bg-[#10263c]/55"
-              }`}
+              className="rounded-lg border px-3 py-4 flex flex-col items-center gap-2 transition-colors bg-white/5 border-white/10 hover:bg-white/10"
             >
-              <Icon className={`w-5 h-5 ${active ? "text-[#5BBFA0]" : "text-[#7A9BB5]"}`} aria-hidden />
-              <span className={`text-xs font-sans ${active ? "text-[#d8f1e8]" : "text-[#7A9BB5]"}`}>
-                {item.label}
-              </span>
+              <Icon className="w-5 h-5 text-[#7A9BB5]" aria-hidden />
+              <span className="text-xs font-sans text-[#7A9BB5]">{item.label}</span>
             </motion.button>
           );
         })}

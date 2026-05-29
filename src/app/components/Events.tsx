@@ -1,15 +1,8 @@
 import { useMemo, useState } from "react";
-import { Calendar, Clock, MapPin, Users } from "lucide-react";
+import { Calendar, Clock, MapPin, Plus, Users, X } from "lucide-react";
 import { motion } from "motion/react";
 
-const CATEGORIES = [
-  "All",
-  "Coffee Chats",
-  "Workshops",
-  "Founder Runs",
-  "AI Nights",
-  "Networking",
-] as const;
+const CATEGORIES = ["Professional", "Recharge"] as const;
 
 type EventCategory = (typeof CATEGORIES)[number];
 
@@ -21,7 +14,7 @@ type FounderEvent = {
   time: string;
   location: string;
   attendeeCount: number;
-  category: Exclude<EventCategory, "All">;
+  category: EventCategory;
 };
 
 const MOCK_EVENTS: FounderEvent[] = [
@@ -33,7 +26,7 @@ const MOCK_EVENTS: FounderEvent[] = [
     time: "7:00 AM",
     location: "Crissy Field, SF",
     attendeeCount: 12,
-    category: "Founder Runs",
+    category: "Recharge",
   },
   {
     id: "2",
@@ -43,17 +36,7 @@ const MOCK_EVENTS: FounderEvent[] = [
     time: "6:30 PM",
     location: "SoMa Founders Hub",
     attendeeCount: 28,
-    category: "AI Nights",
-  },
-  {
-    id: "3",
-    name: "Tuesday Coffee & Capital",
-    tagline: "Low-key chats over pour-overs, zero agenda",
-    date: "Tue, Jun 3",
-    time: "8:30 AM",
-    location: "Sightglass Coffee, SF",
-    attendeeCount: 9,
-    category: "Coffee Chats",
+    category: "Professional",
   },
   {
     id: "4",
@@ -63,7 +46,7 @@ const MOCK_EVENTS: FounderEvent[] = [
     time: "5:00 PM",
     location: "Online · Zoom",
     attendeeCount: 34,
-    category: "Workshops",
+    category: "Professional",
   },
   {
     id: "5",
@@ -73,17 +56,7 @@ const MOCK_EVENTS: FounderEvent[] = [
     time: "6:00 PM",
     location: "The Battery, SF",
     attendeeCount: 56,
-    category: "Networking",
-  },
-  {
-    id: "6",
-    name: "Sunset Run + Debrief",
-    tagline: "3 miles, then cold brew and honest updates",
-    date: "Mon, Jun 9",
-    time: "6:15 PM",
-    location: "Embarcadero Trail",
-    attendeeCount: 8,
-    category: "Founder Runs",
+    category: "Professional",
   },
   {
     id: "7",
@@ -93,7 +66,7 @@ const MOCK_EVENTS: FounderEvent[] = [
     time: "10:00 AM",
     location: "Mission Workspace",
     attendeeCount: 19,
-    category: "AI Nights",
+    category: "Professional",
   },
   {
     id: "8",
@@ -103,18 +76,60 @@ const MOCK_EVENTS: FounderEvent[] = [
     time: "8:00 AM",
     location: "Hayes Valley",
     attendeeCount: 14,
-    category: "Coffee Chats",
+    category: "Recharge",
+  },
+  {
+    id: "9",
+    name: "Sunrise Group Yoga",
+    tagline: "Stretch it out and reset before the inbox opens",
+    date: "Wed, Jun 11",
+    time: "7:30 AM",
+    location: "Dolores Park, SF",
+    attendeeCount: 16,
+    category: "Recharge",
+  },
+  {
+    id: "10",
+    name: "Founder Gym Meetup",
+    tagline: "Lift together, no pitch—just reps and good company",
+    date: "Thu, Jun 12",
+    time: "6:00 PM",
+    location: "Equinox, SoMa",
+    attendeeCount: 11,
+    category: "Recharge",
+  },
+  {
+    id: "11",
+    name: "Guided Breathwork & Meditation",
+    tagline: "Wind down and decompress with a calm, founder-friendly session",
+    date: "Sun, Jun 15",
+    time: "5:30 PM",
+    location: "The Assembly, SF",
+    attendeeCount: 22,
+    category: "Recharge",
   },
 ];
 
-export default function Events() {
-  const [activeCategory, setActiveCategory] = useState<EventCategory>("All");
-  const [rsvpIds, setRsvpIds] = useState<Set<string>>(new Set());
+const EMPTY_FORM = {
+  name: "",
+  tagline: "",
+  date: "",
+  time: "",
+  location: "",
+  category: "Professional" as EventCategory,
+};
 
-  const filteredEvents = useMemo(() => {
-    if (activeCategory === "All") return MOCK_EVENTS;
-    return MOCK_EVENTS.filter((e) => e.category === activeCategory);
-  }, [activeCategory]);
+export default function Events() {
+  const [activeCategory, setActiveCategory] = useState<EventCategory>("Professional");
+  const [rsvpIds, setRsvpIds] = useState<Set<string>>(new Set());
+  const [events, setEvents] = useState<FounderEvent[]>(MOCK_EVENTS);
+  const [showCreate, setShowCreate] = useState(false);
+  const [form, setForm] = useState(EMPTY_FORM);
+
+  const filteredEvents = useMemo(
+    () => events.filter((e) => e.category === activeCategory),
+    [events, activeCategory],
+  );
 
   const toggleRsvp = (id: string) => {
     setRsvpIds((prev) => {
@@ -125,6 +140,27 @@ export default function Events() {
     });
   };
 
+  const canSubmit = form.name.trim() && form.date.trim() && form.time.trim() && form.location.trim();
+
+  const handleCreate = () => {
+    if (!canSubmit) return;
+    const newEvent: FounderEvent = {
+      id: `user-${Date.now()}`,
+      name: form.name.trim(),
+      tagline: form.tagline.trim() || "Hosted by a fellow founder",
+      date: form.date.trim(),
+      time: form.time.trim(),
+      location: form.location.trim(),
+      attendeeCount: 1,
+      category: form.category,
+    };
+    setEvents((prev) => [newEvent, ...prev]);
+    setRsvpIds((prev) => new Set(prev).add(newEvent.id));
+    setActiveCategory(form.category);
+    setForm(EMPTY_FORM);
+    setShowCreate(false);
+  };
+
   return (
     <div className="min-h-full bg-gradient-to-b from-[#0F1117] via-[#0F1117] to-[#12151D] text-[#EDE8DF] flex flex-col app-texture">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -133,10 +169,23 @@ export default function Events() {
       </div>
 
       <header className="relative z-10 px-6 pt-14 pb-4 shrink-0">
-        <h1 className="font-heading text-3xl tracking-tight text-[#EDE8DF]">Events</h1>
-        <p className="text-sm text-[#9a948a] mt-1 font-sans">
-          Meet founders IRL—runs, workshops, and nights out
-        </p>
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h1 className="font-heading text-3xl tracking-tight text-[#EDE8DF]">Events</h1>
+            <p className="text-sm text-[#9a948a] mt-1 font-sans">
+              Meet founders IRL—runs, workshops, and nights out
+            </p>
+          </div>
+          <motion.button
+            type="button"
+            whileTap={{ scale: 0.97 }}
+            onClick={() => setShowCreate(true)}
+            className="shrink-0 mt-1 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#6B9080] hover:bg-[#5C7568] text-[#0F1117] text-sm font-semibold transition-colors font-sans"
+          >
+            <Plus className="w-4 h-4" aria-hidden />
+            Create
+          </motion.button>
+        </div>
       </header>
 
       <div className="relative z-10 shrink-0 pb-4">
@@ -233,6 +282,133 @@ export default function Events() {
           )}
         </div>
       </div>
+
+      {showCreate && (
+        <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-end">
+          <motion.div
+            initial={{ y: 40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="bg-[#0F1117] w-full max-h-[85%] rounded-t-3xl overflow-hidden flex flex-col border-t border-[rgba(237,232,223,0.1)]"
+          >
+            <div className="p-6 border-b border-white/10 flex items-center justify-between shrink-0">
+              <h3 className="font-heading text-xl text-[#EDE8DF]">Create Event</h3>
+              <button
+                type="button"
+                onClick={() => setShowCreate(false)}
+                className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+                aria-label="Close create event"
+              >
+                <X className="w-5 h-5 text-[#EDE8DF]" />
+              </button>
+            </div>
+
+            <div className="flex-1 min-h-0 overflow-y-auto p-6 space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-[#9a948a] uppercase tracking-wide mb-2 font-sans">
+                  Event name
+                </label>
+                <input
+                  type="text"
+                  value={form.name}
+                  onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                  placeholder="e.g. Founder Coffee Walk"
+                  className="w-full rounded-lg bg-[#161922] border border-white/10 px-4 py-3 text-sm text-[#EDE8DF] placeholder:text-[#9a948a]/55 focus:outline-none focus:ring-1 focus:ring-[#6B9080]/45 font-sans"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-[#9a948a] uppercase tracking-wide mb-2 font-sans">
+                  Tagline
+                </label>
+                <input
+                  type="text"
+                  value={form.tagline}
+                  onChange={(e) => setForm((f) => ({ ...f, tagline: e.target.value }))}
+                  placeholder="A short, inviting description"
+                  className="w-full rounded-lg bg-[#161922] border border-white/10 px-4 py-3 text-sm text-[#EDE8DF] placeholder:text-[#9a948a]/55 focus:outline-none focus:ring-1 focus:ring-[#6B9080]/45 font-sans"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-[#9a948a] uppercase tracking-wide mb-2 font-sans">
+                    Date
+                  </label>
+                  <input
+                    type="text"
+                    value={form.date}
+                    onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))}
+                    placeholder="Thu, Jun 19"
+                    className="w-full rounded-lg bg-[#161922] border border-white/10 px-4 py-3 text-sm text-[#EDE8DF] placeholder:text-[#9a948a]/55 focus:outline-none focus:ring-1 focus:ring-[#6B9080]/45 font-sans"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-[#9a948a] uppercase tracking-wide mb-2 font-sans">
+                    Time
+                  </label>
+                  <input
+                    type="text"
+                    value={form.time}
+                    onChange={(e) => setForm((f) => ({ ...f, time: e.target.value }))}
+                    placeholder="6:00 PM"
+                    className="w-full rounded-lg bg-[#161922] border border-white/10 px-4 py-3 text-sm text-[#EDE8DF] placeholder:text-[#9a948a]/55 focus:outline-none focus:ring-1 focus:ring-[#6B9080]/45 font-sans"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-[#9a948a] uppercase tracking-wide mb-2 font-sans">
+                  Location
+                </label>
+                <input
+                  type="text"
+                  value={form.location}
+                  onChange={(e) => setForm((f) => ({ ...f, location: e.target.value }))}
+                  placeholder="e.g. Crissy Field, SF"
+                  className="w-full rounded-lg bg-[#161922] border border-white/10 px-4 py-3 text-sm text-[#EDE8DF] placeholder:text-[#9a948a]/55 focus:outline-none focus:ring-1 focus:ring-[#6B9080]/45 font-sans"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-[#9a948a] uppercase tracking-wide mb-2 font-sans">
+                  Category
+                </label>
+                <div className="flex gap-2">
+                  {CATEGORIES.map((category) => {
+                    const isActive = form.category === category;
+                    return (
+                      <button
+                        key={category}
+                        type="button"
+                        onClick={() => setForm((f) => ({ ...f, category }))}
+                        className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors font-sans border ${
+                          isActive
+                            ? "bg-[#6B9080] text-[#0F1117] border-[#6B9080]"
+                            : "bg-[#161922] text-[#9a948a] border-white/10 hover:border-[#6B9080]/40 hover:text-[#EDE8DF]"
+                        }`}
+                      >
+                        {category}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6 border-t border-white/10 bg-[#161922] shrink-0">
+              <button
+                type="button"
+                onClick={handleCreate}
+                disabled={!canSubmit}
+                className="w-full py-3.5 rounded-lg bg-[#6B9080] hover:bg-[#5C7568] disabled:bg-[#6B9080]/40 disabled:text-[#0F1117]/60 text-[#0F1117] font-semibold transition-colors font-sans"
+              >
+                Create Event
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }

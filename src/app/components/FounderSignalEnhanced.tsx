@@ -9,8 +9,7 @@ import {
   Clock, 
   Flame,
   Share2,
-  MoreHorizontal,
-  X
+  MoreHorizontal
 } from "lucide-react";
 
 interface Comment {
@@ -40,7 +39,7 @@ interface Post {
 export default function FounderSignalEnhanced() {
   const [newPost, setNewPost] = useState("");
   const [sortBy, setSortBy] = useState<"hot" | "new" | "top">("hot");
-  const [selectedPost, setSelectedPost] = useState<number | null>(null);
+  const [expandedPost, setExpandedPost] = useState<number | null>(null);
   const [newComment, setNewComment] = useState("");
   const [posts, setPosts] = useState<Post[]>([
     {
@@ -166,6 +165,34 @@ export default function FounderSignalEnhanced() {
     }));
   };
 
+  const toggleComments = (postId: number) => {
+    setExpandedPost((prev) => (prev === postId ? null : postId));
+    setNewComment("");
+  };
+
+  const handleAddComment = (postId: number) => {
+    const trimmed = newComment.trim();
+    if (!trimmed) return;
+    setPosts(posts.map((post) => {
+      if (post.id !== postId) return post;
+      const existing = post.comments ?? [];
+      const nextId = existing.reduce((max, c) => Math.max(max, c.id), 0) + 1;
+      const comment: Comment = {
+        id: nextId,
+        content: trimmed,
+        timestamp: "Just now",
+        upvotes: 0,
+        founderType: "Founder, SaaS",
+      };
+      return {
+        ...post,
+        comments: [...existing, comment],
+        commentCount: post.commentCount + 1,
+      };
+    }));
+    setNewComment("");
+  };
+
   const sortedPosts = [...posts].sort((a, b) => {
     if (sortBy === "hot") {
       const scoreA = (a.upvotes - a.downvotes) / (Math.max(parseInt(a.timestamp) || 1, 1));
@@ -177,8 +204,6 @@ export default function FounderSignalEnhanced() {
       return (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes);
     }
   });
-
-  const selectedPostData = posts.find(p => p.id === selectedPost);
 
   return (
     <div className="min-h-full bg-gradient-to-b from-[#0F1117] via-[#0F1117] to-[#12151D] text-[#EDE8DF] px-6 pt-14 pb-6 app-texture">
@@ -329,11 +354,28 @@ export default function FounderSignalEnhanced() {
 
                 {/* Comments */}
                 <button
-                  onClick={() => setSelectedPost(post.id)}
-                  className="flex-1 px-3 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg transition-all flex items-center justify-center gap-2 group"
+                  onClick={() => toggleComments(post.id)}
+                  aria-expanded={expandedPost === post.id}
+                  className={`flex-1 px-3 py-2.5 border rounded-lg transition-all flex items-center justify-center gap-2 group ${
+                    expandedPost === post.id
+                      ? "bg-[#6B9080]/15 border-[#6B9080]/40"
+                      : "bg-white/5 hover:bg-white/10 border-white/10 hover:border-white/20"
+                  }`}
                 >
-                  <MessageCircle className="w-4 h-4 text-white/40 group-hover:text-white/60 transition-colors" />
-                  <span className="text-xs font-medium text-white/60 group-hover:text-white transition-colors">
+                  <MessageCircle
+                    className={`w-4 h-4 transition-colors ${
+                      expandedPost === post.id
+                        ? "text-[#6B9080]"
+                        : "text-white/40 group-hover:text-white/60"
+                    }`}
+                  />
+                  <span
+                    className={`text-xs font-medium transition-colors ${
+                      expandedPost === post.id
+                        ? "text-[#EDE8DF]"
+                        : "text-white/60 group-hover:text-white"
+                    }`}
+                  >
                     {post.commentCount}
                   </span>
                 </button>
@@ -344,77 +386,66 @@ export default function FounderSignalEnhanced() {
                 </button>
               </div>
             </div>
+
+            {/* Inline Comments */}
+            {expandedPost === post.id && (
+              <div className="border-t border-white/10 bg-[#12151D] px-5 py-4">
+                <div className="space-y-3 mb-4">
+                  {post.comments && post.comments.length > 0 ? (
+                    post.comments.map((comment) => (
+                      <div
+                        key={comment.id}
+                        className="bg-[#161922] border border-white/10 rounded-xl p-4"
+                      >
+                        <div className="flex items-start justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center">
+                              <div className="w-2 h-2 rounded-full bg-white/40" />
+                            </div>
+                            <div>
+                              <p className="text-xs font-medium">{comment.founderType}</p>
+                              <p className="text-xs text-white/40">{comment.timestamp}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1 text-white/40">
+                            <ArrowUp className="w-3 h-3" />
+                            <span className="text-xs">{comment.upvotes}</span>
+                          </div>
+                        </div>
+                        <p className="text-sm text-white/80 leading-relaxed">{comment.content}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-6">
+                      <MessageCircle className="w-8 h-8 text-white/20 mx-auto mb-2" />
+                      <p className="text-sm text-white/40">No comments yet. Be the first!</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Comment Input */}
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleAddComment(post.id)}
+                    placeholder="Add a comment..."
+                    className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-[#6B9080]/50 transition-colors"
+                  />
+                  <button
+                    onClick={() => handleAddComment(post.id)}
+                    disabled={!newComment.trim()}
+                    className="px-4 py-2.5 bg-[#6B9080] hover:bg-[#4F6D5F] disabled:bg-white/5 disabled:text-white/30 rounded-xl font-semibold transition-colors"
+                  >
+                    <Send className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
-
-      {/* Comments Modal */}
-      {selectedPost && selectedPostData && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-end">
-          <div className="bg-[#0F1117] w-full max-h-[85vh] rounded-t-3xl overflow-hidden flex flex-col">
-            {/* Modal Header */}
-            <div className="p-6 border-b border-white/10 flex items-center justify-between">
-              <h3 className="font-bold text-lg">Comments ({selectedPostData.commentCount})</h3>
-              <button
-                onClick={() => setSelectedPost(null)}
-                className="p-2 hover:bg-white/5 rounded-lg transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Comments List */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-4">
-              {selectedPostData.comments && selectedPostData.comments.length > 0 ? (
-                selectedPostData.comments.map((comment) => (
-                  <div key={comment.id} className="bg-[#161922] border border-white/10 rounded-xl p-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center">
-                          <div className="w-2 h-2 rounded-full bg-white/40" />
-                        </div>
-                        <div>
-                          <p className="text-xs font-medium">{comment.founderType}</p>
-                          <p className="text-xs text-white/40">{comment.timestamp}</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-1 text-white/40">
-                        <ArrowUp className="w-3 h-3" />
-                        <span className="text-xs">{comment.upvotes}</span>
-                      </div>
-                    </div>
-                    <p className="text-sm text-white/80 leading-relaxed">{comment.content}</p>
-                  </div>
-                ))
-              ) : (
-                <div className="text-center py-12">
-                  <MessageCircle className="w-12 h-12 text-white/20 mx-auto mb-3" />
-                  <p className="text-white/40">No comments yet. Be the first!</p>
-                </div>
-              )}
-            </div>
-
-            {/* Comment Input */}
-            <div className="p-6 border-t border-white/10 bg-[#161922]">
-              <div className="flex gap-3">
-                <input
-                  type="text"
-                  value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
-                  placeholder="Add a comment..."
-                  className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-[#6B9080]/50 transition-colors"
-                />
-                <button
-                  disabled={!newComment.trim()}
-                  className="px-5 py-3 bg-[#6B9080] hover:bg-[#4F6D5F] disabled:bg-white/5 disabled:text-white/30 rounded-xl font-semibold transition-colors"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

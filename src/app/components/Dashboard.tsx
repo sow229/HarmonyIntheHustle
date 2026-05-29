@@ -33,9 +33,11 @@ export default function Dashboard() {
   const postContext = latestCheckIn ? getMoodContext(latestCheckIn) : null;
 
   const activityDays = new Set(activityLogs.map((log) => log.day));
+  const weekStart = new Date();
+  weekStart.setDate(weekStart.getDate() - weekStart.getDay());
   const streakWeek = Array.from({ length: 7 }, (_, idx) => {
-    const date = new Date();
-    date.setDate(date.getDate() - (6 - idx));
+    const date = new Date(weekStart);
+    date.setDate(weekStart.getDate() + idx);
     const day = date.toLocaleDateString("en-CA");
     return {
       day,
@@ -72,7 +74,6 @@ export default function Dashboard() {
         <div className="relative z-10 flex-1 overflow-y-auto min-h-0 flex flex-col pt-8 pb-4">
           <PostCheckInHome
             firstName={firstName}
-            moodContext={postContext}
             latestCheckIn={latestCheckIn}
             checkInStreak={checkInStreak}
             hasLoggedActivityToday={hasLoggedActivityToday}

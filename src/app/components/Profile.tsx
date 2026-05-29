@@ -92,7 +92,7 @@ export default function Profile() {
 
       {/* Activity Timeline */}
       <div className="mb-6">
-        <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-4">
+        <h3 className="text-xs font-semibold text-white/50 uppercase tracking-wide mb-4 font-sans">
           Activity Timeline
         </h3>
         {activityRows.length === 0 ? (
