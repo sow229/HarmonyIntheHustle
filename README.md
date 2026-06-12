@@ -1,9 +1,9 @@
 
   # Equil
 
-  This is a code bundle for the Equil mobile app UI. The original project is available at https://www.figma.com/design/c1a7SIOGHEA2c0kqQFBKjr/FounderFlow-Mobile-App-UI.
+  This is a code bundle for the Equil mobile app UI. This project was made in relation to the Office of Creative Inquiry at Lehigh University. 
 
-  ## Running the code
+  https://creativeinquiry.lehigh.edu/impactfellowships/silicon-valley-social-impact-fellowship/rethinking-wellbeing
 
   Run `npm i` to install the dependencies.
 
